@@ -1,0 +1,103 @@
+{
+  "common": {
+    "language": "English",
+    "buttons": {
+      "download_desktop": "Download Desktop",
+      "get_impulls": "Get Impulls",
+      "try_web_version": "Try Web App",
+      "developer_portal": "Developer Portal",
+      "api_docs": "Explore Api Docs",
+      "open_supports": "Open Support & Blog",
+      "contact_us": "Contact Us",
+      "download_now": "Download Now"
+    }
+  },
+  "header": {
+    "home": "Home",
+    "booking": "Booking",
+    "services": "Services",
+    "about": "About",
+    "reviews": "Reviews",
+    "contacts": "Contacts"
+  },
+  "main": {
+    "hero": {
+      "subtitle": "The Ultimate Connection",
+      "motto_part1": "Beyond",
+      "motto_part2": "Messaging.",
+      "description": "Impulls is a spatial ecosystem designed for deep focus, immersive collaboration, and absolute privacy."
+    }
+  },
+  "features": {
+    "extra_markdown": {
+      "title": "Extra Markdown",
+      "description": "Extended for your messages. Format the code, tables, and lists directly in the chat."
+    },
+    "encrypted": {
+      "title": "E2E Encrypted",
+      "description": "Your data is yours. We use military-grade encryption for every byte."
+    },
+    "custom_room_system": {
+      "title": "Custom Room System",
+      "description": "A new flexible chat management system. Configure privacy, roles, and access rights for any task."
+    }
+  },
+  "api": {
+    "hero": {
+      "title_part1": "Our",
+      "title_part2": "Impulls API.",
+      "description": "Extend Impulls with our powerful, native Messenger API. Build custom bots, automate workflows, or integrate your own tools directly into the chat experience."
+    },
+    "features_list": {
+      "feature1": "Real-time Webhook delivery",
+      "feature2": "Full control over message formatting",
+      "feature3": "Secure OAuth2 authentication",
+      "feature4": "Native support for spatial audio triggers"
+    },
+    "example": {
+      "messages": {
+        "connection_ok": "✅ The connection is established",
+        "ping_reply": "Pong! \uD83C\uDFD3",
+        "log_new_msg": "New message:"
+      },
+      "comments": {
+        "initialization": "Initialization",
+        "comment2": "",
+        "comment3": "",
+        "comment4": ""
+      }
+    },
+    "preview": {
+      "status": "API Status",
+      "active": "Operational",
+      "disabled": "Down"
+    }
+  },
+  "information_cards": {
+    "title_part1": "More information of",
+    "title_part2": "Details.",
+    "edge_infrastructure": {
+      "title": "Edge Infrastructure",
+      "description": "12,000+ nodes globally ensure your data travels at the speed of light, with sub-20ms latency in every major city."
+    },
+    "zero_trust": {
+      "title": "Zero Trust",
+      "description": "Decentralized identity management means we never hold your keys."
+    },
+    "self_destruct_ode": {
+      "title": "Self-Destruct Mode",
+      "description": "Set timers for messages to vanish without a trace."
+    },
+    "smart_routing_engine": {
+      "title": "Smart Routing Engine",
+      "description": "Our AI-driven traffic management dynamically reroutes requests to the healthiest node, bypassing network congestion in real-time."
+    },
+    "stay_ahead_of_the_curve": {
+      "title": "Stay Ahead of the Curve",
+      "description": "Explore our latest protocol updates, security patches, and deep-dive technical articles in our community hub."
+    }
+  },
+  "end_card": {
+    "title": "Ready for the next generation?"
+  }
+}
