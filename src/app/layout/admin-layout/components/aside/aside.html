@@ -1,0 +1,40 @@
+<div class="admin-sidebar__logo">
+  <app-icon class="admin-sidebar__logo-icon" name="admin_panel_settings"></app-icon>
+  <span class="admin-sidebar__logo-text">Admin<span>Hub</span></span>
+</div>
+
+<nav class="admin-nav">
+  <a routerLink="/admin/dashboard" routerLinkActive="admin-nav__link--active" class="admin-nav__link">
+    <div class="admin-nav__icon-box">
+      <app-icon name="dashboard"></app-icon>
+    </div>
+    <span class="admin-nav__text">{{ 'admin.nav.dashboard' | transloco }}</span>
+  </a>
+  <a routerLink="/admin/shop" routerLinkActive="admin-nav__link--active" class="admin-nav__link">
+    <div class="admin-nav__icon-box">
+      <app-icon name="shopping_bag"></app-icon>
+    </div>
+    <span class="admin-nav__text">{{ 'admin.nav.store' | transloco }}</span>
+  </a>
+  <a routerLink="/admin/users" routerLinkActive="admin-nav__link--active" class="admin-nav__link">
+    <div class="admin-nav__icon-box">
+      <app-icon name="people"></app-icon>
+    </div>
+    <span class="admin-nav__text">{{ 'admin.nav.users' | transloco }}</span>
+  </a>
+  <a routerLink="/admin/services" routerLinkActive="admin-nav__link--active" class="admin-nav__link">
+    <div class="admin-nav__icon-box">
+      <app-icon name="edit_note"></app-icon>
+    </div>
+    <span class="admin-nav__text">{{ 'admin.nav.services' | transloco }}</span>
+  </a>
+</nav>
+
+<div class="admin-sidebar__footer">
+  <a routerLink="/" class="admin-nav__link">
+    <div class="admin-nav__icon-box">
+      <app-icon name="logout"></app-icon>
+    </div>
+    <span class="admin-nav__text">{{ 'admin.nav.exit' | transloco }}</span>
+  </a>
+</div>

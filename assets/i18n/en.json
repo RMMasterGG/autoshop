@@ -2,8 +2,9 @@
   "common": {
     "language": "English",
     "buttons": {
-      "download_desktop": "Download Desktop",
-      "get_impulls": "Get Impulls",
+      "login": "Login",
+      "login_aria": "Login in App",
+      "sign-in": "Sign in",
       "try_web_version": "Try Web App",
       "developer_portal": "Developer Portal",
       "api_docs": "Explore Api Docs",
@@ -13,91 +14,270 @@
     }
   },
   "header": {
+  },
+  "nav": {
     "home": "Home",
+    "home_aria": "Go to home section",
     "booking": "Booking",
+    "booking_aria": "Open service booking section",
     "services": "Services",
+    "services_aria": "View our services",
     "about": "About",
+    "about_aria": "Learn more about AutoShop",
     "reviews": "Reviews",
-    "contacts": "Contacts"
+    "reviews_aria": "Read customer reviews",
+    "contacts": "Contacts",
+    "contacts_aria": "Go to contact information"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "services": "Services",
+    "subscribe": "Subscribe",
+    "subscribe_aria": "Subscribe to our newsletter",
+    "description": "Your reliable partner in the world of cars. Quality repair and best parts in Tikhoretsk.",
+    "email_placeholder": "Your Email",
+    "subscribe_description": "Get news and promotions first"
+  },
+  "legal": {
+    "rights_reserved": "© {{ year }} AutoShop. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "privacy_aria": "Read our Privacy Policy",
+    "terms": "Terms of Use",
+    "terms_aria": "Read our Terms of Use"
   },
   "main": {
     "hero": {
-      "subtitle": "The Ultimate Connection",
-      "motto_part1": "Beyond",
-      "motto_part2": "Messaging.",
-      "description": "Impulls is a spatial ecosystem designed for deep focus, immersive collaboration, and absolute privacy."
-    }
-  },
-  "features": {
-    "extra_markdown": {
-      "title": "Extra Markdown",
-      "description": "Extended for your messages. Format the code, tables, and lists directly in the chat."
+      "badge": "Best service in Tikhoretsk",
+      "title": "Your car in safe hands",
+      "description": "Professional repair, quality parts and individual approach to every client. We know everything about cars.",
+      "booking": "Book Service",
+      "booking_aria": "Book service on website",
+      "services": "View Services",
+      "services_aria": "View services in shop"
     },
-    "encrypted": {
-      "title": "E2E Encrypted",
-      "description": "Your data is yours. We use military-grade encryption for every byte."
-    },
-    "custom_room_system": {
-      "title": "Custom Room System",
-      "description": "A new flexible chat management system. Configure privacy, roles, and access rights for any task."
-    }
-  },
-  "api": {
-    "hero": {
-      "title_part1": "Our",
-      "title_part2": "Impulls API.",
-      "description": "Extend Impulls with our powerful, native Messenger API. Build custom bots, automate workflows, or integrate your own tools directly into the chat experience."
-    },
-    "features_list": {
-      "feature1": "Real-time Webhook delivery",
-      "feature2": "Full control over message formatting",
-      "feature3": "Secure OAuth2 authentication",
-      "feature4": "Native support for spatial audio triggers"
-    },
-    "example": {
-      "messages": {
-        "connection_ok": "✅ The connection is established",
-        "ping_reply": "Pong! \uD83C\uDFD3",
-        "log_new_msg": "New message:"
-      },
-      "comments": {
-        "initialization": "Initialization",
-        "comment2": "",
-        "comment3": "",
-        "comment4": ""
+    "features": {
+      "advantage": "",
+      "adv": {
+        "1": {
+          "title": "Experienced Masters",
+          "description": "Our specialists have more than 10 years of experience."
+        },
+        "2": {
+          "title": "Modern Equipment",
+          "description": "We use only professional tools and diagnostic stands."
+        },
+        "3": {
+          "title": "Work Guarantee",
+          "description": "We provide an official guarantee for all types of services and parts."
+        },
+        "4": {
+          "title": "Fair Prices",
+          "description": "No hidden fees. We agree on the cost before starting work."
+        }
       }
     },
-    "preview": {
-      "status": "API Status",
-      "active": "Operational",
-      "disabled": "Down"
+    "services": {
+      "title_part1": "Our",
+      "title_part2": "Services",
+      "card": {
+        "from": "from",
+        "button": "Learn more"
+      }
+    },
+    "about": {
+      "title_part1": "About",
+      "title_part2": "Us",
+      "subtitle": "AutoShop is not just a service, it is a team of professionals in love with their work.",
+      "description_part1": "We have been working in Tikhoretsk for over 10 years, providing quality repair and maintenance services for cars of all makes. Our mission is to ensure the safety and comfort of your movement.",
+      "description_part2": "We have modern diagnostic equipment and our own parts warehouse, which allows us to perform work as quickly and efficiently as possible.",
+      "cards": {
+        "1": {
+          "title": "10+",
+          "description": "Years of Experience"
+        },
+        "2": {
+          "title": "5000+",
+          "description": "Clients"
+        }
+      }
+    },
+    "reviews": {
+      "title_part1": "Customer",
+      "title_part2": "Reviews",
+      "form": {
+        "title_part1": "Leave a",
+        "title_part2": "Review",
+        "name": "Your Name",
+        "name_placeholder": "Aleksandr",
+        "review": "Your Review",
+        "review_placeholder": "Share your impressions...",
+        "rating": "Rating",
+        "submit": "Submit Review"
+      }
+    },
+    "contacts": {
+      "title_part1": "Our",
+      "title_part2": "Contacts",
+      "address_title": "Address",
+      "address": "95 Grazhdanskaya St, Tikhoretsk, Krasnodar Krai",
+      "phone_title": "Phones",
+      "phone_service": "Service Station:",
+      "phone_shop": "Shop:",
+      "working_hours_title": "Working Hours",
+      "working_hours": "Mon-Sat: 09:00 - 18:00, Sun: Closed"
     }
   },
-  "information_cards": {
-    "title_part1": "More information of",
-    "title_part2": "Details.",
-    "edge_infrastructure": {
-      "title": "Edge Infrastructure",
-      "description": "12,000+ nodes globally ensure your data travels at the speed of light, with sub-20ms latency in every major city."
+  "form": {
+    "register": {
+      "title_part1": "Create",
+      "title_part2": "Account",
+      "subtitle": "Join AutoShop",
+      "field": {
+        "name": "Name",
+        "name_placeholder": "John Doe",
+        "email": "Email",
+        "email_placeholder": "example@gmail.com",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "terms": "I agree to the terms of use"
+      },
+      "button": "Register",
+      "text_link": "Already have an account?",
+      "link": "Login"
     },
-    "zero_trust": {
-      "title": "Zero Trust",
-      "description": "Decentralized identity management means we never hold your keys."
-    },
-    "self_destruct_ode": {
-      "title": "Self-Destruct Mode",
-      "description": "Set timers for messages to vanish without a trace."
-    },
-    "smart_routing_engine": {
-      "title": "Smart Routing Engine",
-      "description": "Our AI-driven traffic management dynamically reroutes requests to the healthiest node, bypassing network congestion in real-time."
-    },
-    "stay_ahead_of_the_curve": {
-      "title": "Stay Ahead of the Curve",
-      "description": "Explore our latest protocol updates, security patches, and deep-dive technical articles in our community hub."
+    "login": {
+      "title_part1": "Create",
+      "title_part2": "Account",
+      "subtitle": "Join AutoShop",
+      "field": {
+        "name": "Name",
+        "name_placeholder": "John Doe",
+        "email": "Email",
+        "email_placeholder": "example@gmail.com",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "terms": "I agree to the terms of use"
+      },
+      "button": "Register",
+      "text_link": "Already have an account?",
+      "link": "Login"
     }
   },
-  "end_card": {
-    "title": "Ready for the next generation?"
+  "shop": {
+    "title": "Spare Parts Store",
+    "description": "Genuine parts for your vehicle. Quality guaranteed.",
+    "utils": {
+      "categories": "Categories",
+      "price_range": "Price Range",
+      "showing_products": "Showing products",
+      "sort_by": "Sort by",
+      "all_parts": "All Parts"
+    }
+  },
+  "booking": {
+    "title": "Book a",
+    "subtitle": "Service",
+    "desc": "Submit a maintenance request, and our manager will contact you within 15 minutes to clarify the details.",
+    "why_us": "Our Advantages",
+    "reason1": "We use only original parts and high-quality equivalents",
+    "reason2": "Masters with over 10 years of experience in foreign car maintenance",
+    "reason3": "Official warranty for all performed work up to 1 year",
+    "need_help": "Need help?",
+    "help_desc": "If you don't know which service you need, just call us. We will consult you for free:",
+    "success_title": "Request Received!",
+    "success_desc": "Thank you for your trust! We have already started processing your request and will call you back shortly.",
+    "send_another": "Send another request",
+    "name_label": "Your Name",
+    "phone_label": "Phone Number",
+    "car_label": "Car Make & Model",
+    "service_label": "Select Service",
+    "service_placeholder": "What needs to be fixed?",
+    "other": "Other (specify in comments)",
+    "comment_label": "Order Comments",
+    "comment_placeholder": "Describe the problem or list the necessary parts...",
+    "submit": "Book Service Now",
+    "terms": "By clicking the button, you agree to the privacy policy and the terms of processing personal data"
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "store": "My Store",
+      "users": "Users",
+      "services": "Services",
+      "exit": "Exit Admin"
+    },
+    "dash": {
+      "title": "Analytics Overview",
+      "stats": {
+        "visits": "Total Visits",
+        "orders": "New Orders",
+        "revenue": "Revenue",
+        "rating": "Avg. Rating"
+      },
+      "status": {
+        "rejected": "Rejected",
+        "pending": "Pending",
+        "completed": "Completed"
+      },
+      "charts": {
+        "traffic": "Traffic Analysis",
+        "recent_orders": "Recent Orders"
+      },
+      "period": {
+        "7d": "Last 7 Days",
+        "30d": "Last 30 Days"
+      }
+    },
+    "shop": {
+      "title": "Spare Parts Shop",
+      "add_product": "Add New Product",
+      "table": {
+        "product": "Product",
+        "category": "Category",
+        "price": "Price",
+        "stock": "Stock",
+        "actions": "Actions",
+        "in_stock": "in stock"
+      },
+      "modal": {
+        "add_title": "New Product",
+        "edit_title": "Edit Product",
+        "basic_info": "Basic Information",
+        "select_category": "Select category",
+        "image_link": "Image link",
+        "localization": "Localization",
+        "description": "Description",
+        "enter_title": "Title in English",
+        "enter_desc": "Description in English",
+        "cancel": "Cancel",
+        "create": "Create",
+        "update": "Update",
+        "saving": "Saving..."
+      }
+    },
+    "users": {
+      "title": "User Management",
+      "add_user": "Add New User",
+      "table": {
+        "user": "User",
+        "role": "Role",
+        "create_date": "Create Date",
+        "update_date": "Update Date",
+        "actions": "Actions"
+      },
+      "status": {
+        "active": "Active",
+        "blocked": "Blocked"
+      }
+    },
+    "services": {
+      "title": "User Management",
+      "add_service": "Add New User",
+      "service": {
+        "price_contact": "Contact for price",
+        "published": "Published",
+        "unpublished": "Unpublished"
+      }
+    }
   }
 }

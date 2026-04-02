@@ -1,0 +1,87 @@
+<div class="modal-card" *transloco="let t">
+  <form [formGroup]="form" (ngSubmit)="save()">
+
+    <!-- Хедер -->
+    <div class="modal-card__header">
+      <div class="modal-card__title-group">
+        <h2 class="modal-card__title">
+          {{ isEdit() ? t('admin.users.modal.edit_title') : t('admin.users.modal.add_title') }}
+        </h2>
+        <div class="modal-card__status">
+          <mat-icon>person</mat-icon>
+          <span>{{ form.get('role')?.value }}</span>
+        </div>
+      </div>
+
+      <div class="modal-card__header-actions">
+        <button class="modal-card__close" (click)="close()" type="button">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Контент -->
+    <div class="modal-form">
+      @if (isLoadingData()) {
+        <div class="modal-loader">
+          <mat-icon class="spin">sync</mat-icon>
+          <span>{{ t('admin.shop.modal.loading') }}</span>
+        </div>
+      } @else {
+        <!-- Основные данные пользователя -->
+        <div class="form-section">
+          <h4 class="form-section__title">{{ t('admin.users.modal.account_info') }}</h4>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="username">{{ t('admin.users.table.username') }}</label>
+              <input id="username" type="text" formControlName="username" placeholder="john_doe">
+            </div>
+            <div class="form-group">
+              <label for="email">{{ t('admin.users.table.email') }}</label>
+              <input id="email" type="email" formControlName="email" placeholder="example@mail.com">
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="role">{{ t('admin.users.table.role') }}</label>
+              <select id="role" formControlName="role">
+                @for (role of roles(); track role) {
+                  <option [value]="role">{{ role }}</option>
+                }
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="password">
+                {{ isEdit() ? t('admin.users.modal.new_password') : t('admin.users.modal.password') }}
+              </label>
+              <input id="password" type="password" formControlName="password" placeholder="******">
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="linkImg">{{ t('admin.users.modal.avatar_url') }}</label>
+              <div class="input-with-icon">
+                <mat-icon>image</mat-icon>
+                <input id="linkImg" type="text" formControlName="linkImg" placeholder="https://...">
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Футер -->
+    <div class="modal-card__footer">
+      <button type="button" class="btn-secondary" (click)="close()">{{ t('admin.shop.modal.cancel') }}</button>
+      <button type="submit" class="btn-primary" [disabled]="form.invalid || isSaving() || isLoadingData()">
+        @if (isSaving()) {
+          <mat-icon class="spin">sync</mat-icon>
+        }
+        {{ isSaving() ? t('admin.shop.modal.saving') : (isEdit() ? t('admin.shop.modal.update') : t('admin.shop.modal.create')) }}
+      </button>
+    </div>
+  </form>
+</div>

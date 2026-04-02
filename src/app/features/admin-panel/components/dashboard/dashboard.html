@@ -1,0 +1,136 @@
+<div class="dashboard">
+  <!-- Заголовок и выбор периода -->
+  <header class="dashboard__header">
+    <h1 class="dashboard__title">{{ 'admin.dash.title' | transloco }}</h1>
+    <div class="dashboard__period">
+      <button
+        class="dashboard__period-btn"
+        [class.dashboard__period-btn--active]="dashboardStore.days() === 7"
+        (click)="dashboardStore.updatePeriod(7)">
+        {{ 'admin.dash.period.7d' | transloco }}
+      </button>
+      <button
+        class="dashboard__period-btn"
+        [class.dashboard__period-btn--active]="dashboardStore.days() === 30"
+        (click)="dashboardStore.updatePeriod(30)">
+        {{ 'admin.dash.period.30d' | transloco }}
+      </button>
+    </div>
+  </header>
+
+  <!-- Карточки статистики -->
+  <section class="dashboard__stats">
+    @if (dashboardStore.stats(); as s) {
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--blue">
+          <app-icon name="visibility"></app-icon>
+        </div>
+        <div class="stat-card__info">
+          <span class="stat-card__label">{{ 'admin.dash.stats.visits' | transloco }}</span>
+          <span class="stat-card__value">{{ s.visits }}</span>
+          <span class="stat-card__trend stat-card__trend--up">+12.5%</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--green">
+          <app-icon name="shopping_cart"></app-icon>
+        </div>
+        <div class="stat-card__info">
+          <span class="stat-card__label">{{ 'admin.dash.stats.orders' | transloco }}</span>
+          <span class="stat-card__value">{{ s.orders }}</span>
+          <span class="stat-card__trend stat-card__trend--up">+5.2%</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--purple">
+          <app-icon name="payments"></app-icon>
+        </div>
+        <div class="stat-card__info">
+          <span class="stat-card__label">{{ 'admin.dash.stats.revenue' | transloco }}</span>
+          <span class="stat-card__value">{{ s.revenue | number }} ₽</span>
+          <span class="stat-card__trend stat-card__trend--down">-2.1%</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--orange">
+          <app-icon name="star"></app-icon>
+        </div>
+        <div class="stat-card__info">
+          <span class="stat-card__label">{{ 'admin.dash.stats.rating' | transloco }}</span>
+          <span class="stat-card__value">{{ s.avgRaring | number:'1.1-1' }}</span>
+          <span class="stat-card__trend stat-card__trend--up">+0.3</span>
+        </div>
+      </div>
+    }
+  </section>
+
+  <!-- Секция графиков и последних заказов -->
+  <div class="dashboard__charts">
+    <!-- График трафика -->
+    <article class="chart-card">
+      <h3 class="chart-card__title">{{ 'admin.dash.charts.traffic' | transloco }}</h3>
+      <div class="chart-mock">
+        <div class="chart-mock__bar-container">
+          @for (item of dashboardStore.traffic(); track item.date) {
+            <div class="chart-mock__bar-wrapper">
+              <div class="chart-mock__bar-area">
+                <div class="chart-mock__bar"
+                     [style.height.%]="(item.count / maxTraffic()) * 100">
+                </div>
+                <div class="chart-mock__tooltip">
+                  <span class="chart-mock__tooltip-value">{{ item.count }}</span>
+                  <span class="chart-mock__tooltip-label">{{ 'admin.dash.stats.visits' | transloco }}</span>
+                </div>
+              </div>
+              <!-- Вырезаем число дня из даты ГГГГ-ММ-ДД -->
+              <span class="chart-mock__label">{{ item.date.split('-')[2] }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </article>
+
+    <!-- Список последних заказов -->
+    <article class="chart-card">
+      <h3 class="chart-card__title">{{ 'admin.dash.charts.recent_orders' | transloco }}</h3>
+      <div class="recent-list">
+        <!-- Если эндпоинт заказов еще не готов, используем моки, но структуру оставляем под данные из стора -->
+        @for (order of dashboardStore.recentOrders(); track order.id) {
+          <!-- Тут будет верстка заказа, когда бэк будет готов -->
+        }
+
+        <!-- Временные статические элементы для визуала -->
+        <div class="recent-item">
+          <div class="recent-item__user">
+            <img src="https://picsum.photos/seed/u1/40/40" alt="User">
+            <div class="recent-item__user-info">
+              <span class="recent-item__name">Alex Johnson</span>
+              <span class="recent-item__meta">2 hours ago</span>
+            </div>
+          </div>
+          <span class="recent-item__amount">4,500 ₽</span>
+          <span class="recent-item__status recent-item__status--pending">
+            {{ 'admin.dash.status.pending' | transloco }}
+          </span>
+        </div>
+
+        <div class="recent-item">
+          <div class="recent-item__user">
+            <img src="https://picsum.photos/seed/u2/40/40" alt="User">
+            <div class="recent-item__user-info">
+              <span class="recent-item__name">Sarah Williams</span>
+              <span class="recent-item__meta">5 hours ago</span>
+            </div>
+          </div>
+          <span class="recent-item__amount">12,200 ₽</span>
+          <span class="recent-item__status recent-item__status--completed">
+            {{ 'admin.dash.status.completed' | transloco }}
+          </span>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>

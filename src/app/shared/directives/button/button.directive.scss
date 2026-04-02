@@ -1,0 +1,92 @@
+.app-button {
+  font: inherit;
+  font-weight: 700;
+  border: none;
+  border-radius: calc(var(--spacing) * 2);
+  cursor: pointer;
+  transition: color 0.3s cubic-bezier(0.25, 1.2, 0.8, 1),
+  background-color 0.3s cubic-bezier(0.25, 1.2, 0.8, 1),
+  transform 0.3s cubic-bezier(0.25, 1.2, 0.8, 1);
+  user-select: none;
+  box-sizing: border-box;
+
+  &--sm {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  &--md {
+    padding-inline: calc(var(--spacing) * 6);
+    padding-block: calc(var(--spacing) * 2);
+  }
+
+  &--lg {
+    padding-inline: calc(var(--spacing) * 6);
+    padding-block: calc(var(--spacing) * 3);
+  }
+
+  &--xl {
+    padding: 0.25rem 0.75rem;
+  }
+
+  &--full {
+    font-size: 1.125rem;
+    padding-block: calc(var(--spacing) * 3);
+    width: 100%;
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+
+    &:hover {
+      filter: none !important;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.app-button--primary {
+  color: white;
+  background-color: var(--neon);
+
+  &:hover {
+    color: var(--neon);
+    background-color: white;
+    box-shadow: 0 0 5px color-mix(in srgb, white, transparent 30%);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.app-button--secondary {
+
+}
+
+.app-button--ghost {
+  color: var(--neon);
+  background-color: transparent;
+  border: 2px solid var(--neon);
+
+  &:hover {
+    color: white;
+    background-color: var(--neon);
+    box-shadow: 0 0 5px color-mix(in srgb, var(--neon), transparent 30%);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.app-button--loading {
+
+}

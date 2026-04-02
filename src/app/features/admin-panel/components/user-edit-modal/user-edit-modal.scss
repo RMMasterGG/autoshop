@@ -1,0 +1,329 @@
+:host {
+  display: block;
+}
+
+::ng-deep {
+  .custom-modal-container .mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 32px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .mat-mdc-dialog-surface {
+    background-color: transparent!important;
+  }
+
+  .cdk-overlay-backdrop {
+    background: rgba(0, 0, 0, 0.6) !important;
+
+    // Эффект размытия
+    backdrop-filter: blur(8px) !important;
+
+    // Поддержка для старых версий Safari
+    -webkit-backdrop-filter: blur(8px) !important;
+
+    // Плавное появление размытия
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.modal-card {
+  max-width: 900px;
+  width: 100%;
+  background: #151515;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.01);
+  }
+
+  &__title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #34c759;
+
+    mat-icon {
+      font-size: 14px;
+      width: 14px;
+      height: 14px;
+    }
+
+    &--hidden {
+      color: #ff3b30;
+    }
+  }
+
+  &__header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__close {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+
+    &:hover {
+      background: rgba(255, 0, 60, 0.1);
+      color: #ff003c;
+    }
+  }
+}
+
+.modal-form {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.form-section {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #ff003c;
+    font-weight: 800;
+    margin: 0;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 колонки
+  margin-bottom: 4px;
+  gap: 24px;
+
+  .full-width {
+    grid-column: span 3;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  input, select, textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #fff;
+    outline: none;
+    transition: .3s;
+
+    &:focus {
+      border-color: #ff003c;
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  select option {
+    background: #1a1a1a;
+  }
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    position: absolute;
+    left: 12px;
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 20px;
+  }
+
+  input {
+    padding-left: 44px;
+    width: 100%;
+  }
+}
+
+.lang-tabs {
+  display: flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 4px;
+  border-radius: 12px;
+}
+
+.lang-tab {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 6px 16px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .3s;
+
+  &--active {
+    background: #ff003c;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(255, 0, 60, 0.3);
+  }
+}
+
+.visibility-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: .4s;
+    border-radius: 34px;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+  }
+
+  input:checked + &__slider {
+    background-color: #34c759;
+  }
+
+  input:checked + &__slider:before {
+    transform: translateX(20px);
+  }
+}
+
+.modal-card__footer {
+  padding: 24px 32px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn-primary {
+  background: #ff003c;
+  border: none;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 0, 60, 0.4);
+  }
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hidden {
+  display: none;
+}

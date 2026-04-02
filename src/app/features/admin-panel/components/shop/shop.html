@@ -1,0 +1,82 @@
+<div class="shop">
+  <!-- Хедер страницы -->
+  <header class="shop__header">
+    <h1 class="shop__title">{{ 'admin.shop.title' | transloco }}</h1>
+    <button class="shop__add-btn" (click)="openProductModal()">
+      <app-icon name="add_shopping_card"></app-icon>
+      <span>{{ 'admin.shop.add_product' | transloco }}</span>
+    </button>
+  </header>
+
+  <!-- Контейнер с таблицей -->
+  <div class="shop__table-container">
+    <table class="shop-table">
+      <thead>
+      <tr>
+        <th>{{ 'admin.shop.table.product' | transloco }}</th>
+        <th>{{ 'admin.shop.table.category' | transloco }}</th>
+        <th>{{ 'admin.shop.table.price' | transloco }}</th>
+        <th>{{ 'admin.shop.table.stock' | transloco }}</th>
+        <th>{{ 'admin.shop.table.actions' | transloco }}</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (item of shopStore.entities(); track item.id) {
+          <tr class="shop-table__row">
+            <!-- Товар (Инфо) -->
+            <td>
+              <div class="shop-table__product">
+                <img [src]="item.linkImg" alt="Product" referrerpolicy="no-referrer">
+                <div class="shop-table__info">
+                  <span class="shop-table__name">    {{ item.title || item.translations?.[0]?.title || ('admin.shop.modal.no_title' | transloco) }}</span>
+                  <span class="shop-table__id">ID: {{ item.id }}</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Категория -->
+            <td>
+              <span class="shop-table__category">
+                {{ item.category }}
+              </span>
+            </td>
+
+            <!-- Цена -->
+            <td>
+              <span class="shop-table__price">{{ item.price }} ₽</span>
+            </td>
+
+            <!-- Склад (Stock Bar) -->
+            <td>
+              <div class="shop-table__stock-wrapper">
+                <div class="shop-table__stock-bar">
+                  <div class="shop-table__stock-fill"
+                       [style.width.%]="(item.stock / 50) * 100"
+                       [class.shop-table__stock-fill--low]="item.stock < 10">
+                  </div>
+                </div>
+                <span class="shop-table__stock-text">
+                  {{ item.stock }} {{ 'admin.shop.table.in_stock' | transloco }}
+                </span>
+              </div>
+            </td>
+
+            <!-- Действия -->
+            <td>
+              <div class="shop-table__actions">
+                <button class="shop-table__btn"
+                        [title]="'admin.shop.actions.edit' | transloco"
+                        (click)="openProductModal(item)">
+                  <app-icon name="pencil"></app-icon>
+                </button>
+                <button class="shop-table__btn shop-table__btn--delete" [title]="'admin.shop.actions.delete' | transloco">
+                  <app-icon name="trash"></app-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

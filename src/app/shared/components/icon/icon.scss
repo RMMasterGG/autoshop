@@ -1,0 +1,12 @@
+:host {
+  display: inline-flex;
+  width: var(--icon-size, 24px);
+  height: var(--icon-size, 24px);
+  color: inherit;
+}
+:host ::ng-deep svg {
+  width: 100%;
+  height: 100%;
+}
+
+

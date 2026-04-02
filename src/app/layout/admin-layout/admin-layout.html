@@ -1,0 +1,32 @@
+<div class="admin-layout">
+  <as-aside></as-aside>
+
+  <div class="admin-main">
+    <header class="admin-header">
+      <div class="admin-header__search">
+        <!--      <mat-icon>search</mat-icon>-->
+<!--        <input type="text" [placeholder]="'admin.header.search_placeholder' | transloco">-->
+      </div>
+
+      <div class="admin-header__actions">
+<!--        <button class="admin-header__btn">-->
+<!--          &lt;!&ndash;        <mat-icon>notifications</mat-icon>&ndash;&gt;-->
+<!--        </button>-->
+
+        <div class="admin-header__user">
+          <img src="{{authStore.user()?.linkImg}}" alt="Avatar" referrerpolicy="no-referrer">
+          <div class="admin-header__user-info">
+            <span class="admin-header__user-name">{{ authStore.user()?.username }}</span>
+            <span class="admin-header__user-role">{{ authStore.user()?.role }}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="admin-view">
+      <div class="admin-view__card">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+</div>

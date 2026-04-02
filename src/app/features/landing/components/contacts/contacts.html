@@ -1,0 +1,55 @@
+<div class="contacts__container">
+  <div class="contacts__content">
+    <div class="contact__info">
+      <h2 class="contact__title">{{ 'main.contacts.title_part1' | transloco }}
+        <span>{{ 'main.contacts.title_part2' | transloco }}</span></h2>
+      <div class="contact__badges">
+
+        <div class="badge">
+          <div class="badge__icon"><app-icon [name]="'location_on'"></app-icon></div>
+          <div>
+            <h4 class="badge__title">{{ 'main.contacts.address_title' | transloco }}</h4>
+            <p class="badge__description">{{ 'main.contacts.address' | transloco }}</p>
+          </div>
+        </div>
+
+        <div class="badge">
+          <div class="badge__icon"><app-icon [name]="'phone'"></app-icon></div>
+          <div>
+            <h4 class="badge__title">{{ 'main.contacts.phone_title' | transloco }}</h4>
+            <p class="badge__description">
+              {{ 'main.contacts.phone_service' | transloco }}
+              <a class="badge__link">{{ environment.contacts.service }}</a>
+            </p>
+            <p class="badge__description">
+              {{ 'main.contacts.phone_shop' | transloco }}
+              <a class="badge__link">{{ environment.contacts.shop }}</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="badge">
+          <div class="badge__icon"><app-icon [name]="'schedule'"></app-icon></div>
+          <div>
+            <h4 class="badge__title">{{ 'main.contacts.working_hours_title' | transloco }}</h4>
+            <p class="badge__description">{{ 'main.contacts.working_hours' | transloco }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="socials">
+        <a class="socials__button" href=""><app-icon [name]="'facebook'"></app-icon></a>
+        <a class="socials__button" href=""><app-icon [name]="'instagram'"></app-icon></a>
+        <a class="socials__button" href=""><app-icon [name]="'telegram'"></app-icon></a>
+      </div>
+    </div>
+    <div class="map">
+      <iframe [src]="safeMapUrl"
+              width="100%"
+              height="100%"
+              frameborder="0"
+              allowfullscreen="true"
+              style="position:relative; filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);">
+      </iframe>
+    </div>
+  </div>
+</div>

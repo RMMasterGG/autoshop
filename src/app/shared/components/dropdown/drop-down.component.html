@@ -1,0 +1,18 @@
+<!--<div class="dropdown-container" [class.open]="pop.isOpen()">-->
+  <ui-popover #pop="uiPopover" [positions]="this.positions()" [customClass]="'dropdown-popover'">
+    <div trigger class="dropdown-header">
+      <ng-content select="[selected]"></ng-content>
+      @if (this.arrow()) {
+        <span class="arrow" [class.open]="pop.isOpen()">▼</span>
+      }
+    </div>
+
+    <div class="dropdown-content">
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </div>
+  </ui-popover>
+
+<!--</div>-->
+<ng-template #contentTemplate>
+  <ng-content></ng-content>
+</ng-template>

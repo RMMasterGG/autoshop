@@ -1,0 +1,57 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  @if (authStore.error()) {
+    <div class="form-error-message">
+      {{ authStore.error() }}
+    </div>
+  }
+
+  <div>
+    <label class="form-label" for="name">{{ 'form.register.field.name' | transloco }}</label>
+    <div class="field">
+      <input class="form-input" [placeholder]="'form.register.field.name_placeholder' | transloco"
+             type="text" id="name" formControlName="name">
+      <app-icon class="form-icon" [name]="'person'"></app-icon>
+    </div>
+  </div>
+
+  <div>
+    <label class="form-label" for="email">{{ 'form.register.field.email' | transloco }}</label>
+    <div class="field">
+      <input class="form-input" [placeholder]="'form.register.field.email_placeholder' | transloco"
+             type="email" id="email" formControlName="email">
+      <app-icon class="form-icon" [name]="'mail'"></app-icon>
+    </div>
+  </div>
+
+  <div>
+    <label class="form-label" for="password">{{ 'form.register.field.password' | transloco }}</label>
+    <div class="field">
+      <input class="form-input" placeholder="••••••••" type="password" id="password"
+             formControlName="password">
+      <app-icon class="form-icon" [name]="'key'"></app-icon>
+    </div>
+  </div>
+
+  <div>
+    <label class="form-label" for="confirmPassword">{{ 'form.register.field.confirmPassword' | transloco }}</label>
+    <div class="field">
+      <input class="form-input" placeholder="••••••••" type="password" id="confirmPassword"
+             formControlName="confirmPassword">
+      <app-icon class="form-icon" [name]="'lock-reset'"></app-icon>
+    </div>
+  </div>
+
+  <div class="terms">
+    <input class="terms-input" formControlName="terms" type="checkbox" id="terms">
+    <label class="terms-label" for="terms">{{ 'form.register.field.terms' | transloco }}</label>
+  </div>
+
+  <button appButton [size]="'full'" type="submit" [disabled]="authStore.isLoading() || registerForm.invalid">
+    @if (authStore.isLoading()) {
+      {{ 'common.loading' | transloco }}...
+    } @else {
+      {{ 'form.register.button' | transloco }}
+    }
+  </button>
+</form>

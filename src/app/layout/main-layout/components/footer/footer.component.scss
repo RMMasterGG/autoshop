@@ -1,5 +1,214 @@
+@use 'mixins' as *;
+
 :host {
-  display: block;
-  padding: calc(var(--spacing) * 2);
-  background-color: black;
+  display: flex;
+  background-color: var(--bg);
+  width: 100%;
+}
+
+.footer__container {
+  // Уменьшаем боковые отступы на мобилках
+  padding-inline: calc(var(--spacing) * 4);
+  padding-bottom: calc(var(--spacing) * 10);
+  @include container;
+
+  @media (min-width: 1024px) {
+    padding-inline: calc(var(--spacing) * 8);
+  }
+}
+
+.main-footer__content {
+  display: grid;
+  // По умолчанию (мобилки) — 1 колонка
+  grid-template-columns: 1fr;
+  gap: calc(var(--spacing) * 10);
+  padding-top: calc(var(--spacing) * 10);
+  padding-bottom: calc(var(--spacing) * 10);
+
+  // Планшеты: 2 колонки
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  // Десктоп: твои оригинальные 4 колонки
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: calc(var(--spacing) * 12);
+    padding-top: calc(var(--spacing) * 20);
+    padding-bottom: calc(var(--spacing) * 16);
+  }
+}
+
+.legal-footer__content {
+  display: flex;
+  // На мобилках — колонкой и по центру
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  padding-top: calc(var(--spacing) * 10);
+  border-top: 1px solid var(--border);
+  gap: calc(var(--spacing) * 6);
+
+  // На десктопе — в ряд и по краям
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.legal__title {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  text-decoration: none;
+  margin: 0;
+  transition: color 0.3s cubic-bezier(0.25, 1.2, 0.8, 1);
+
+  &:is(a):hover {
+    color: var(--foreground);
+  }
+}
+
+.legal__list {
+  display: flex;
+  gap: calc(var(--spacing) * 4);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  // Центрируем логотип на мобилках
+  @media (max-width: 639px) {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.brand__title {
+  display: flex;
+  flex-direction: row;
+  gap: calc(var(--spacing) * 2);
+}
+
+.brand__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  width: calc(var(--spacing) * 8);
+  height: calc(var(--spacing) * 8);
+  background-color: var(--neon);
+  border-radius: calc(var(--spacing) * 2);
+
+  app-icon {
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
+  }
+}
+
+.brand__name {
+  color: white;
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+
+  b {
+    color: var(--neon);
+    text-shadow: 0 0 15px color-mix(in srgb, var(--neon) 70%, transparent);
+  }
+}
+
+.brand__description {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-top: calc(var(--spacing) * 4);
+}
+
+.navigation, .services {
+  display: flex;
+  flex-direction: column;
+
+  // Центрируем списки на мобилках для лучшего вида
+  @media (max-width: 639px) {
+    align-items: center;
+  }
+}
+
+.list__array {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @media (max-width: 639px) {
+    text-align: center;
+  }
+}
+
+.list__title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--foreground);
+  letter-spacing: 0.1em;
+  margin: 0 0 calc(var(--spacing) * 6) 0;
+}
+
+.list__button {
+  margin-bottom: calc(var(--spacing) * 4);
+  cursor: pointer;
+
+  a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: color 0.3s cubic-bezier(0.25, 1.2, 0.8, 1);
+
+    &:hover {
+      color: var(--neon);
+    }
+  }
+}
+
+.newsletter {
+  @media (max-width: 639px) {
+    text-align: center;
+  }
+}
+
+.newsletter__description {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: calc(var(--spacing) * 4);
+}
+
+.newsletter__list {
+  display: flex;
+  flex-direction: row;
+  max-width: 400px; // Ограничиваем ширину на мобилках, чтобы не растягивалось слишком сильно
+
+  @media (max-width: 639px) {
+    margin-inline: auto;
+  }
+}
+
+.newsletter__email-form {
+  border-radius: calc(var(--spacing) * 2) 0 0 calc(var(--spacing) * 2);
+  width: 100%;
+}
+
+.newsletter__button {
+  border-radius: 0 calc(var(--spacing) * 2) calc(var(--spacing) * 2) 0;
+  flex-shrink: 0; // Чтобы кнопка не сжималась
+
+  &:active {
+    transform: scale(0.98);
+    background-color: color-mix(in srgb, white 80%, transparent);
+  }
 }

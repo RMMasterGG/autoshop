@@ -1,1 +1,34 @@
-<div><app-login-form></app-login-form></div>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  @if (authStore.error()) {
+    <div class="form-error-message">
+      {{ authStore.error() }}
+    </div>
+  }
+
+  <div>
+    <label class="form-label" for="email">{{ 'form.login.field.email' | transloco }}</label>
+    <div class="field">
+      <input class="form-input" [placeholder]="'form.login.field.email_placeholder' | transloco"
+             type="email" id="email" formControlName="email">
+      <app-icon class="form-icon" [name]="'mail'"></app-icon>
+    </div>
+  </div>
+
+  <div>
+    <label class="form-label" for="password">{{ 'form.login.field.password' | transloco }}</label>
+    <div class="field">
+      <input class="form-input" placeholder="••••••••" type="password" id="password"
+             formControlName="password">
+      <app-icon class="form-icon" [name]="'key'"></app-icon>
+    </div>
+  </div>
+
+  <button appButton [size]="'full'" type="submit" [disabled]="authStore.isLoading() || loginForm.invalid">
+    @if (authStore.isLoading()) {
+      {{ 'common.loading' | transloco }}...
+    } @else {
+      {{ 'form.login.button' | transloco }}
+    }
+  </button>
+</form>

@@ -1,0 +1,119 @@
+<div class="modal-card">
+  <form [formGroup]="form" (ngSubmit)="save()">
+
+    <!-- Хедер -->
+    <div class="modal-card__header">
+      <div class="modal-card__title-group">
+        <h2 class="modal-card__title">
+          {{ (isEdit() ? 'admin.shop.modal.edit_title' : 'admin.shop.modal.add_title') | transloco }}
+        </h2>
+        <div class="modal-card__status" [class.modal-card__status--hidden]="!form.get('showFlag')?.value">
+          <mat-icon>{{ form.get('showFlag')?.value ? 'visibility' : 'visibility_off' }}</mat-icon>
+          <span>{{ (form.get('showFlag')?.value ? 'admin.shop.status.active' : 'admin.shop.status.hidden') | transloco }}</span>
+        </div>
+      </div>
+
+      <div class="modal-card__header-actions">
+        <label class="visibility-toggle" [title]="'admin.shop.modal.toggle_visibility' | transloco">
+          <input type="checkbox" formControlName="showFlag">
+          <span class="visibility-toggle__slider"></span>
+        </label>
+        <button class="modal-card__close" (click)="close()" type="button">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Контент -->
+    <div class="modal-form">
+      @if (isLoadingData()) {
+        <div class="modal-loader">
+          <mat-icon class="spin">sync</mat-icon>
+          <span>{{ 'admin.shop.modal.loading' | transloco }}</span>
+        </div>
+      } @else {
+        <!-- Основная информация -->
+        <div class="form-section">
+          <h4 class="form-section__title">{{ 'admin.shop.modal.basic_info' | transloco }}</h4>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="price">{{ 'admin.shop.table.price' | transloco }} (₽)</label>
+              <input id="price" type="number" formControlName="price" placeholder="0.00">
+            </div>
+            <div class="form-group">
+              <label for="stock">{{ 'admin.shop.table.stock' | transloco }}</label>
+              <input id="stock" type="number" formControlName="stock" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label for="category">{{ 'admin.shop.table.category' | transloco }}</label>
+              <select id="category" formControlName="category">
+                <option value="" disabled>{{ 'admin.shop.modal.select_category' | transloco }}</option>
+                @for (cat of categories(); track cat.id) {
+                  <option [value]="cat.id">{{ cat.title }}</option>
+                }
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label for="linkImg">{{ 'admin.shop.modal.image_link' | transloco }}</label>
+              <div class="input-with-icon">
+                <mat-icon>link</mat-icon>
+                <input id="linkImg" type="text" formControlName="linkImg" placeholder="https://...">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Локализация -->
+        <div class="form-section">
+          <div class="lang-section-header">
+            <h4 class="form-section__title">{{ 'admin.shop.modal.localization' | transloco }}</h4>
+            <div class="lang-tabs">
+              @for (lang of languageList(); track lang) {
+                <button type="button" class="lang-tab"
+                        [class.lang-tab--active]="activeLang() === lang"
+                        (click)="activeLang.set(lang)">
+                  {{ lang | uppercase }}
+                </button>
+              }
+            </div>
+          </div>
+
+          <div class="lang-content" formGroupName="translations">
+            @for (lang of languageList(); track lang) {
+              <!-- Важно: [formGroupName] должен совпадать с ключами в TS (ru/en) -->
+              <div [formGroupName]="lang" [hidden]="activeLang() !== lang" class="animate-fade">
+                <div class="form-grid">
+                  <div class="form-group full-width">
+                    <label [for]="'title-' + lang">
+                      {{ 'admin.shop.table.product' | transloco }} ({{ lang | uppercase }})
+                    </label>
+                    <input [id]="'title-' + lang" type="text" formControlName="title"
+                           [placeholder]="'admin.shop.modal.enter_title' | transloco">
+                  </div>
+                  <div class="form-group full-width">
+                    <label [for]="'desc-' + lang">
+                      {{ 'admin.shop.modal.description' | transloco }} ({{ lang | uppercase }})
+                    </label>
+                    <textarea [id]="'desc-' + lang" formControlName="description" rows="3"
+                              [placeholder]="'admin.shop.modal.enter_desc' | transloco"></textarea>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Футер -->
+    <div class="modal-card__footer">
+      <button type="button" class="btn-secondary" (click)="close()">
+        {{ 'admin.shop.modal.cancel' | transloco }}
+      </button>
+      <button type="submit" class="btn-primary" [disabled]="form.invalid || isSaving() || isLoadingData()">
+        @if (isSaving()) { <mat-icon class="spin">sync</mat-icon> }
+        {{ (isSaving() ? 'admin.shop.modal.saving' : (isEdit() ? 'admin.shop.modal.update' : 'admin.shop.modal.create')) | transloco }}
+      </button>
+    </div>
+  </form>
+</div>

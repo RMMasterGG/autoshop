@@ -1,0 +1,22 @@
+<div cdkOverlayOrigin #internalTrigger="cdkOverlayOrigin" (click)="toggle()">
+  <ng-content select="[trigger]"></ng-content>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayPanelClass]="['imp-popover-overlay', customClass()]"
+  [cdkConnectedOverlayOrigin]="externalTrigger() || internalTrigger"
+  [cdkConnectedOverlayOpen]="isOpen()"
+  [cdkConnectedOverlayPush]="true"
+  [cdkConnectedOverlayPositions]="positions()"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  [cdkConnectedOverlayGrowAfterOpen]="true"
+  [cdkConnectedOverlayWidth]="$any(width() ?? undefined)"
+  backdropClass="cdk-overlay-transparent-backdrop"
+  (backdropClick)="close()">
+  <div class="imp-popover-content">
+    @if (isOpen()) {
+      <ng-content></ng-content>
+    }
+  </div>
+</ng-template>

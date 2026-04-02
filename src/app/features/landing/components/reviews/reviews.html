@@ -1,0 +1,80 @@
+<div class="review__container">
+  <div class="review__title">
+    <h2 class="title" #title>{{ 'main.reviews.title_part1' | transloco }}
+      <span>{{ 'main.reviews.title_part2' | transloco }}</span></h2>
+    <div class="border" [style]="borderStyle()"></div>
+  </div>
+  <div class="marquee__container">
+    <div class="marquee__content">
+      @for (review of reviewStore.entities(); track review.id) {
+        <div class="review__card">
+          <app-icon class="icon card-quote" [name]="'quote'"></app-icon>
+          <div class="card-rating">
+            @for (star of [1, 2, 3, 4, 5]; track $index) {
+              <app-icon
+                class="icon"
+                [name]="'star'"
+                [class.active]="$index < review.rating"/>
+            }
+          </div>
+          <p class="card-text">"{{ review.text }}"</p>
+          <div class="card-info">
+            <span class="card-author">{{ review.author }}</span>
+            <span class="card-date">{{ review.date }}</span>
+          </div>
+        </div>
+      }
+
+      @for (review of reviews(); track review.id) {
+        <div class="review__card">
+          <app-icon class="icon card-quote" [name]="'quote'"></app-icon>
+          <div class="card-rating">
+            @for (star of [1, 2, 3, 4, 5]; track $index) {
+              <app-icon
+                class="icon"
+                [name]="'star'"
+                [class.active]="$index < review.rating"/>
+            }
+          </div>
+          <p class="card-text">"{{ review.text }}"</p>
+          <div class="card-info">
+            <span class="card-author">{{ review.author }}</span>
+            <span class="card-date">{{ review.date }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="review-form__container">
+    <div class="review-form__content">
+      <h3 class="review-form__title">{{ 'main.reviews.form.title_part1' | transloco }}
+        <span>{{ 'main.reviews.form.title_part2' | transloco }}</span></h3>
+      <form [formGroup]="reviewForm">
+        <div class="form-inputs">
+          <div>
+            <label class="form-label" for="author">{{ 'main.reviews.form.name' | transloco }}</label>
+            <input class="form-input" type="text" id="author" formControlName="author"
+                   [placeholder]="'main.reviews.form.name_placeholder' | transloco">
+          </div>
+          <div>
+            <span class="form-label">{{ 'main.reviews.form.rating' | transloco }}</span>
+            <div class="form-input-rating">
+              @for (star of [1, 2, 3, 4, 5]; track $index) {
+                <button class="rating-btn"><app-icon
+                  class="icon"
+                  (click)="setRating($index)"
+                  [name]="'star'"
+                  [class.active]="$index <= this.rating()"/></button>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="text-aria" >
+          <label class="form-label">{{ 'main.reviews.form.review' | transloco }}</label>
+          <textarea class="form-input" [placeholder]="'main.reviews.form.review_placeholder' | transloco"></textarea>
+        </div>
+        <button appButton [size]="'full'" class="submitButton">{{ 'main.reviews.form.submit' | transloco }}</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<div class="shop-header__container">
+  <div class="background">
+    <img src="img/shop-background.avif" alt="">
+    <div class="overlay-vertical"></div>
+    <div class="overlay-horizontal"></div>
+  </div>
+  <div class="shop__header">
+    <div class="header__content">
+      <h1 class="header__title">{{ 'shop.title' | transloco }}</h1>
+      <p class="header__description">{{ 'shop.description' | transloco }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="shop__layout">
+  <!-- Боковая панель -->
+  <aside>
+    <form [formGroup]="filterForm" class="shop__sidebar">
+      <div class="filter__group">
+        <h3 class="filter-group__title">{{ 'shop.utils.categories' | transloco }}</h3>
+        <div class="filter-group__list">
+          @if (isFormReady()) {
+            <label class="filter-item">
+              <input class="filter-checkbox" type="checkbox" formControlName="all" (change)="onCategoryChange('all')">
+              <span>{{ 'shop.utils.all_parts' | transloco }}</span>
+            </label>
+            @for (category of shopStore.categories(); track category.id) {
+              <label class="filter-item">
+                <input class="filter-checkbox" type="checkbox" [formControlName]="category.id"
+                       (change)="onCategoryChange(category.id)">
+                <span>{{ category.title }}</span>
+              </label>
+            }
+          }
+        </div>
+      </div>
+      <div class="filter__group">
+        <h3 class="filter-group__title">{{ 'shop.utils.price_range' | transloco }}</h3>
+        <as-price-range formControlName="maxPrice"></as-price-range>
+      </div>
+    </form>
+  </aside>
+
+  <main class="shop__main">
+    <!-- Сортировка или хлебные крошки -->
+    <nav class="shop__nav">
+      <span class="shop__count">{{ 'shop.utils.showing_products' | transloco }} {{ shopStore.totalElements() }}</span>
+      <div class="sort__container">
+        <span class="sort__title">{{ 'shop.utils.sort_by' | transloco }}</span>
+        <!--    тут вместо див компонент с выбором сортировки дроп даун    -->
+        <div>
+          <ui-dropdown #sortPicker [class.popover-open]="sortPicker.hasOpen()">
+
+            <button selected class="current-sort sort-item">
+              {{ sortLabels[shopStore.sort()] }}
+            </button>
+
+            <div class="sort-content" content>
+              @for (option of orderedSortOptions(); track option.value) {
+                <button class="sort-item"
+                        [class.active]="shopStore.sort() === option.value"
+                        (click)="onSortChange(option.value); sortPicker.close()">
+                  {{ option.label }}
+                </button>
+              }
+            </div>
+
+          </ui-dropdown>
+        </div>
+      </div>
+    </nav>
+
+    <div class="shop__grid">
+      @for (item of shopStore.entities(); track item.id) {
+        <article class="product-card">
+          <div class="product-card__image-wrapper">
+            <img [src]="item.linkImg" alt="Товар" class="product-card__img">
+            <!-- Берем заголовок из переводов -->
+          </div>
+
+          <div class="product-card__content">
+            <span class="product-card__category">{{ item.category }}</span>
+            <h3 class="product-card__title">{{ item.title || 'Без названия' }}</h3>
+            <p class="product-card__text">{{ item.description }}</p>
+
+            <div class="product-card__footer">
+              <span class="product-card__price">{{ item.price }} ₽</span>
+              <button class="product-card__add-btn">
+                <app-icon [name]="'cart_plus'"></app-icon>
+              </button>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </main>
+</div>

@@ -1,0 +1,102 @@
+<div class="booking">
+  <div class="booking__blob booking__blob--top"></div>
+  <div class="booking__blob booking__blob--bottom"></div>
+
+  <div class="booking__container">
+    <header class="booking__header">
+      <h1 class="booking__title">
+        {{ 'booking.title' | transloco }}
+        <span class="booking__title--neon">{{ 'booking.subtitle' | transloco }}</span>
+      </h1>
+      <p class="booking__description">{{ 'booking.desc' | transloco }}</p>
+    </header>
+
+    <div class="booking__content">
+      <aside class="booking__info">
+        <div class="booking__card booking__card--glass">
+          <h3 class="booking__card-title">
+            <app-icon name="info"></app-icon>
+            <span>{{ 'booking.why_us' | transloco }}</span>
+          </h3>
+          <ul class="booking__reasons">
+            <li class="booking__reason-item">
+              <app-icon name="check_circle"></app-icon>
+              <span>{{ 'booking.reason1' | transloco }}</span>
+            </li>
+            <li class="booking__reason-item">
+              <app-icon name="check_circle"></app-icon>
+              <span>{{ 'booking.reason2' | transloco }}</span>
+            </li>
+            <li class="booking__reason-item">
+              <app-icon name="check_circle"></app-icon>
+              <span>{{ 'booking.reason3' | transloco }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="booking__card booking__card--neon-accent">
+          <h3 class="booking__card-title">{{ 'booking.need_help' | transloco }}</h3>
+          <p class="booking__help-text">{{ 'booking.help_desc' | transloco }}</p>
+<!--          <a [href]="'tel:' + contacts().stoPhone" class="booking__phone-link">-->
+<!--            {{ contacts().stoPhone }}-->
+<!--          </a>-->
+        </div>
+      </aside>
+
+      <main class="booking__form-area">
+        @if (isSubmitted()) {
+          <div class="booking__success">
+            <div class="booking__success-icon">
+              <app-icon name="done_all"></app-icon>
+            </div>
+            <h2 class="booking__success-title">{{ 'booking.success_title' | transloco }}</h2>
+            <p class="booking__success-text">{{ 'booking.success_desc' | transloco }}</p>
+            <button (click)="isSubmitted.set(false)" class="booking__button booking__button--outline">
+              {{ 'booking.send_another' | transloco }}
+            </button>
+          </div>
+        } @else {
+          <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="booking__card booking__card--main-form">
+            <div class="booking__grid">
+              <div class="booking__field">
+                <label class="booking__label">{{ 'booking.name_label' | transloco }}</label>
+                <input type="text" formControlName="name" class="booking__input" [placeholder]="'register.name_placeholder' | transloco">
+              </div>
+              <div class="booking__field">
+                <label class="booking__label">Email (для создания аккаунта)</label>
+                <input type="email" formControlName="email" class="booking__input" placeholder="example@mail.com">
+              </div>
+              <div class="booking__field">
+                <label class="booking__label">{{ 'booking.phone_label' | transloco }}</label>
+                <input type="tel" formControlName="phone" class="booking__input" placeholder="+7 (999) 000-00-00">
+              </div>
+              <div class="booking__field">
+                <label class="booking__label">{{ 'booking.car_label' | transloco }}</label>
+                <input type="text" formControlName="car" class="booking__input" placeholder="Toyota Camry">
+              </div>
+              <div class="booking__field booking__field--full">
+                <label class="booking__label">{{ 'booking.service_label' | transloco }}</label>
+                <select formControlName="serviceId" class="booking__input booking__input--select">
+                  <option value="" disabled>{{ 'booking.service_placeholder' | transloco }}</option>
+                  @for (s of availableServices(); track s.id) {
+                    <option [value]="s.id">{{s.title}}</option>
+                  }
+                  <option value="other">{{ 'booking.other' | transloco }}</option>
+                </select>
+              </div>
+              <div class="booking__field booking__field--full">
+                <label class="booking__label">{{ 'booking.comment_label' | transloco }}</label>
+                <textarea formControlName="message" rows="4" class="booking__input" [placeholder]="'booking.comment_placeholder' | transloco"></textarea>
+              </div>
+            </div>
+
+            <button type="submit" [disabled]="bookingForm.invalid || isSubmitting()" class="booking__button">
+              {{ isSubmitting() ? '...' : ('booking.submit' | transloco) }}
+            </button>
+            <p class="booking__terms">{{ 'booking.terms' | transloco }}</p>
+          </form>
+        }
+      </main>
+    </div>
+  </div>
+</div>

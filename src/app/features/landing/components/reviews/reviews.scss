@@ -1,0 +1,233 @@
+:host {
+  display: block;
+  padding-block: calc(var(--spacing) * 24);
+  overflow: hidden;
+}
+
+.review__title {
+  position: relative;
+  text-align: center;
+  margin-bottom: calc(var(--spacing) * 16);
+}
+
+.title {
+  display: inline-block;
+  width: auto;
+  font-size: 3rem;
+  font-style: italic;
+  text-transform: uppercase;
+  font-weight: 900;
+  margin: 0 0 calc(var(--spacing) * 4) 0;
+  color: white;
+
+  span {
+    color: var(--neon);
+    text-shadow: 0 0 15px color-mix(in srgb, var(--neon) 70%, transparent);
+  }
+}
+
+.border {
+  margin-inline: auto;
+  height: var(--spacing);
+  border-radius: calc(infinity * 1px);
+  background-color: var(--neon);
+}
+
+.marquee__container {
+  display: flex;
+  gap: calc(var(--spacing) * 8);
+  overflow: hidden;
+  padding-block: calc(var(--spacing) * 10);
+  user-select: none;
+  mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent);
+}
+
+.marquee__content {
+  display: flex;
+  min-width: 100%;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--spacing) * 8);
+  animation: marquee 30s linear infinite;
+  z-index: 1;
+
+  &:has(.review__card:hover) {
+    animation-play-state: paused;
+
+    .review__card {
+      opacity: 0.5;
+      filter: blur(1px);
+    }
+  }
+}
+
+.review__card {
+  background-color: color-mix(in oklab, var(--card) 80%, transparent);
+  position: relative;
+  flex-shrink: 0;
+  width: 350px;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  padding: calc(var(--spacing) * 6);
+  transition: all 0.3s cubic-bezier(0.25, 1.2, 0.8, 1);
+
+  &:hover {
+    opacity: 1 !important;
+    filter: blur(0) !important;
+    transform: scale(1.05);
+    border-color: var(--neon);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--neon) 30%, transparent);
+    z-index: 100;
+  }
+}
+
+.card-quote {
+  position: absolute;
+  top: calc(var(--spacing) * 6);
+  right: calc(var(--spacing) * 6);
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
+  color: white;
+  transition: color 0.3s cubic-bezier(0.25, 1.2, 0.8, 1);
+
+  &.active {
+    color: var(--neon);
+  }
+}
+
+.card-rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: calc(var(--spacing) * 4);
+  gap: calc(var(--spacing));
+}
+
+.card-text {
+  color: color-mix(in oklab, white 70%, transparent);
+  font-style: italic;
+  height: calc(var(--spacing) * 24);
+  margin: 0 0 calc(var(--spacing) * 8) 0;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-author {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+}
+
+.card-date {
+  font-family: "JetBrains Mono",
+  ui-monospace,
+  SFMono-Regular,
+  monospace;
+  font-size: 0.8rem;
+  color: color-mix(in oklab, white 30%, transparent);
+}
+
+.review-form__container {
+  margin-top: calc(var(--spacing) * 20);
+  max-width: 48rem;
+  margin-inline: auto;
+  padding-inline: calc(var(--spacing) * 4);
+}
+
+.review-form__content {
+  padding: calc(var(--spacing) * 6);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background-color: color-mix(in oklab, var(--card) 80%, transparent);
+
+  transition: border 0.3s cubic-bezier(0.25, 1.2, 0.8, 1);
+
+  &:hover {
+    border: 1px solid var(--neon);
+  }
+}
+
+.review-form__title {
+  display: block;
+  text-align: center;
+  margin: 0 0 calc(var(--spacing) * 8) 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-style: italic;
+  color: white;
+
+  span {
+    color: var(--neon);
+  }
+}
+
+.form-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--spacing) * 6);
+  margin-bottom: calc(var(--spacing) * 6);
+  box-sizing: border-box;
+}
+
+.form-label {
+  display: block;
+  margin-left: calc(var(--spacing) * 1);
+  margin-bottom: calc(var(--spacing) * 2);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: color-mix(in oklab, white 50%, transparent);
+  text-transform: uppercase;
+}
+
+.form-input {
+  font: inherit;
+  font-weight: 500;
+  color: white;
+  outline-style: none;
+  padding-block: calc(var(--spacing) * 3);
+  padding-inline: calc(var(--spacing) * 4);
+  background-color: color-mix(in oklab, white 5%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+
+  resize: vertical;
+}
+
+.form-input-rating {
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--spacing) * 2);
+}
+
+.rating-btn {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  transition: transform 0.3s cubic-bezier(0.25, 1.2, 0.8, 1);
+
+  &:active {
+    transform: scale(125%);
+  }
+}
+
+.submitButton {
+  margin-top: calc(var(--spacing) * 6);
+}
+

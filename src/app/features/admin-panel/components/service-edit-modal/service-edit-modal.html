@@ -1,0 +1,120 @@
+<div class="modal-card" *transloco="let t">
+  <form [formGroup]="form" (ngSubmit)="save()">
+
+    <!-- Хедер -->
+    <div class="modal-card__header">
+      <div class="modal-card__title-group">
+        <h2 class="modal-card__title">
+          {{ isEdit() ? t('admin.shop.modal.edit_title') : t('admin.shop.modal.add_title') }}
+        </h2>
+        <div class="modal-card__status" [class.modal-card__status--hidden]="!form.get('showFlag')?.value">
+          <mat-icon>{{ form.get('showFlag')?.value ? 'visibility' : 'visibility_off' }}</mat-icon>
+          <span>{{ form.get('showFlag')?.value ? t('admin.shop.status.active') : t('admin.shop.status.hidden') }}</span>
+        </div>
+      </div>
+
+      <div class="modal-card__header-actions">
+        <label class="visibility-toggle" [title]="t('admin.shop.modal.toggle_visibility')">
+          <input type="checkbox" formControlName="showFlag">
+          <span class="visibility-toggle__slider"></span>
+        </label>
+        <button class="modal-card__close" (click)="close()" type="button">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Контент -->
+    <div class="modal-form">
+      @if (isLoadingData()) {
+        <div class="modal-loader">
+          <mat-icon class="spin">sync</mat-icon>
+          <span>{{ t('admin.shop.modal.loading') }}</span>
+        </div>
+      } @else {
+        <!-- General Info -->
+        <div class="form-section">
+          <h4 class="form-section__title">{{ t('admin.shop.modal.basic_info') }}</h4>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="price">{{ t('admin.shop.table.price') }} (₽)</label>
+              <input id="price" type="number" formControlName="price" placeholder="0.00">
+            </div>
+            <div class="form-group">
+              <label for="icon">{{ t('admin.shop.table.price') }} (₽)</label>
+              <input id="icon" type="text" formControlName="icon" placeholder="star">
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="actionType">{{ t('admin.shop.table.action_types') }}</label>
+              <select id="actionType" formControlName="actionType">
+                @for (act of actionTypes(); track $index) {
+                  <option [value]="act">{{ act.toString() }}</option>
+                }
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="actionValue">{{ t('admin.shop.table.action_value') }}</label>
+              <input id="actionValue" type="text" formControlName="actionValue" placeholder="/link">
+            </div>
+          </div>
+        </div>
+
+        <!-- Translations -->
+        <div class="form-section">
+          <div class="lang-section-header">
+            <h4 class="form-section__title">{{ t('admin.shop.modal.localization') }}</h4>
+            <div class="lang-tabs">
+              @for (lang of languageList(); track lang) {
+                <button type="button" class="lang-tab"
+                        [class.lang-tab--active]="activeLang() === lang"
+                        (click)="activeLang.set(lang)">
+                  {{ lang | uppercase }}
+                </button>
+              }
+            </div>
+          </div>
+
+          <!-- Важно: переключаем группу внутри translations -->
+          <div class="lang-content" formGroupName="translations">
+            <!-- Перебираем все языки из твоего списка -->
+            @for (lang of languageList(); track lang) {
+              <!-- Каждая группа должна иметь свое имя [formGroupName]="lang" -->
+                <!-- Мы скрываем те, что не активны, через [hidden] или [class.hidden] -->
+              <div [formGroupName]="lang" [hidden]="activeLang() !== lang" class="animate-fade">
+                <div class="form-grid">
+                  <div class="form-group full-width">
+                    <label [for]="'title-' + lang">
+                      {{ t('admin.shop.table.product') }} ({{ lang | uppercase }})
+                    </label>
+                    <input [id]="'title-' + lang" type="text" formControlName="title"
+                           [placeholder]="t('admin.shop.modal.enter_title')">
+                  </div>
+                  <div class="form-group full-width">
+                    <label [for]="'desc-' + lang">
+                      {{ t('admin.shop.modal.description') }} ({{ lang | uppercase }})
+                    </label>
+                    <textarea [id]="'desc-' + lang" formControlName="description" rows="3"
+                              [placeholder]="t('admin.shop.modal.enter_desc')"></textarea>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-card__footer">
+      <button type="button" class="btn-secondary" (click)="close()">{{ t('admin.shop.modal.cancel') }}</button>
+      <button type="submit" class="btn-primary" [disabled]="form.invalid || isSaving() || isLoadingData()">
+        @if (isSaving()) {
+          <mat-icon class="spin">sync</mat-icon>
+        }
+        {{ isSaving() ? t('admin.shop.modal.saving') : (isEdit() ? t('admin.shop.modal.update') : t('admin.shop.modal.create')) }}
+      </button>
+    </div>
+  </form>
+</div>

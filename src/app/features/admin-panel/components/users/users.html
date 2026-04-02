@@ -1,0 +1,75 @@
+<div class="users">
+  <!-- Заголовок и кнопка добавления -->
+  <header class="users__header">
+    <h1 class="users__title">{{ 'admin.users.title' | transloco }}</h1>
+    <button class="users__add-btn" (click)="openProductModal(null)">
+      <app-icon name="person-add"></app-icon>
+      <span>{{ 'admin.users.add_user' | transloco }}</span>
+    </button>
+  </header>
+
+  <!-- Таблица пользователей -->
+  <div class="users__table-container">
+    <table class="users-table">
+      <thead>
+      <tr>
+        <th>{{ 'admin.users.table.user' | transloco }}</th>
+        <th>{{ 'admin.users.table.role' | transloco }}</th>
+        <th>{{ 'admin.users.table.create_date' | transloco }}</th>
+        <th>{{ 'admin.users.table.update_date' | transloco }}</th>
+        <th>{{ 'admin.users.table.actions' | transloco }}</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (user of userStore.entities(); track user.id) {
+          <tr class="users-table__row">
+            <!-- Пользователь (Аватар + Данные) -->
+            <td>
+              <div class="users-table__user">
+                <img [src]="user.linkImg" alt="Avatar" referrerpolicy="no-referrer">
+                <div class="users-table__info">
+                  <span class="users-table__name">{{ user.username }}</span>
+                  <span class="users-table__email">{{ user.email }}</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Роль -->
+            <td>
+              <span class="users-table__role"
+                    [class.users-table__role--admin]="user.role === 'ADMIN'">
+                {{ user.role }}
+              </span>
+            </td>
+
+            <!-- Последний вход -->
+            <td>
+              <span class="users-table__date">{{ user.createdAt }}</span>
+            </td>
+
+            <!-- Статус -->
+            <td>
+              <span class="users-table__date">{{ user.updatedAt }}</span>
+            </td>
+
+            <!-- Действия -->
+            <td>
+              <div class="users-table__actions">
+                <button
+                  class="users-table__btn"
+                  [title]="'admin.users.actions.edit' | transloco"
+                  (click)="openProductModal(user)">
+                  <app-icon name="pencil"></app-icon>
+                </button>
+                <button class="users-table__btn users-table__btn--delete"
+                        [title]="'admin.users.actions.delete' | transloco">
+                  <app-icon name="trash"></app-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

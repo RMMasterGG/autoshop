@@ -1,0 +1,49 @@
+<div class="services">
+  <!-- Хедер секции услуг -->
+  <header class="services__header">
+    <h1 class="services__title">{{ 'admin.services.title' | transloco }}</h1>
+    <button class="services__add-btn"
+            (click)="openProductModal(null)">
+      <app-icon name="add_circle"></app-icon>
+      <span>{{ 'admin.services.add_service' | transloco }}</span>
+    </button>
+  </header>
+
+  <div class="services__grid">
+    @for (service of servicesStore.entities(); track service.id) {
+      <article class="service-card">
+        <div class="service-card__header">
+          <div class="service-card__icon">
+            <app-icon [name]="service.icon"></app-icon>
+          </div>
+          <div class="service-card__actions">
+            <button class="service-card__btn"
+                    [title]="'admin.services.edit' | transloco"
+                    (click)="openProductModal(service)">
+              <app-icon name="pencil"></app-icon>
+            </button>
+            <button class="service-card__btn service-card__btn--delete"
+                    [title]="'admin.services.delete' | transloco"
+            >
+              <app-icon name="trash"></app-icon>
+            </button>
+          </div>
+        </div>
+
+        <h3 class="service-card__title">{{ service.title }}</h3>
+        <p class="service-card__desc">{{ service.description }}</p>
+
+        <div class="service-card__footer">
+          <span class="service-card__price">
+            {{ service.price || ['admin.services.service.price_contact' | transloco] }}
+          </span>
+          <span class="service-card__status"
+                [class.service-card__status--published]="service.showFlag"
+                [class.service-card__status--unpublished]="!service.showFlag">
+  {{ (service.showFlag ? 'admin.services.service.published' : 'admin.services.service.unpublished') | transloco }}
+</span>
+        </div>
+      </article>
+    }
+  </div>
+</div>

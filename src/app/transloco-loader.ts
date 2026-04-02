@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Translation, TranslocoLoader } from '@jsverse/transloco';
 import { HttpClient } from '@angular/common/http';
-import { isPlatformServer } from '@angular/common';
+import { environment } from '../environments/environment';
 import { PLATFORM_ID } from '@angular/core';
 
 /**
@@ -41,8 +41,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
    * @throws {HttpErrorResponse} При ошибке загрузки файла переводов
    */
   getTranslation(lang: string) {
-    const baseUrl = 'http://localhost:4201';
 
-    return this.http.get<Translation>(`${baseUrl}/i18n/${lang}.json`);
+    return this.http.get<Translation>(`${environment.apiUrl}/i18n/${lang}.json`);
   }
 }

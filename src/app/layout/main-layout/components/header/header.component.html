@@ -1,14 +1,58 @@
-<div class="brand">
-  <div class="brand__icon"></div>
-  <div class="brand__name"></div>
-</div>
-<div class="navigation">
-  <a href="#main" class="navigation__button">{{ 'header.home' | transloco }}</a>
-  <a href="#booking" class="navigation__button">{{ 'header.booking' | transloco }}</a>
-  <a href="#services" class="navigation__button">{{ 'header.services' | transloco }}</a>
-  <a href="#about" class="navigation__button">{{ 'header.about' | transloco }}</a>
-  <a href="#reviews" class="navigation__button">{{ 'header.reviews' | transloco }}</a>
-  <a href="#contacts" class="navigation__button">{{ 'header.contacts' | transloco }}</a>
-</div>
-<div class="theme-picker"></div>
-<div class="profile"></div>
+<header class="header__container">
+  <!-- Логотип -->
+  <a class="brand" (click)="goToHome(); closeMenu()">
+    <div class="brand__icon">
+      <app-icon [name]="'car-front'"></app-icon>
+    </div>
+    <div class="brand__name">
+      Auto<b>Shop</b>
+    </div>
+  </a>
+
+  <nav class="navigation" [class.navigation--open]="isMenuOpen()">
+    @if (activeIndex() !== -1) {
+      <div
+        [class.animated]="isInitialized()"
+        [ngStyle]="indicatorStyles()"
+        class="active-indicator"></div>
+    }
+
+    @for (item of navItems; track $index) {
+      <a
+        #navButtons
+        [routerLink]="item.type === 'link' ? ['/'] : [item.link]"
+        [fragment]="item.type === 'link' ? item.link : undefined"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: item.type === 'button' }"
+        class="navigation__button"
+        [class.active]="activeIndex() === $index"
+        (click)="setActive($event, $index, item.link); closeMenu()"
+        [attr.aria-label]="[item.label + '_aria' | transloco]"
+        [class]="item.customClass">
+        {{ item.label | transloco }}
+      </a>
+    }
+  </nav>
+
+  <div class="header__actions">
+    <div class="theme-picker">
+      <app-icon [name]="'sun'"></app-icon>
+    </div>
+
+    @if (authStore.isAuthenticated()) {
+      <div class="header__user">
+        <img [src]="authStore.user()?.linkImg" alt="Avatar" referrerpolicy="no-referrer">
+        <div class="header__user-info">
+          <span class="header__user-name">{{ authStore.user()?.username }}</span>
+          <span class="header__user-role">{{ authStore.user()?.role }}</span>
+        </div>
+      </div>
+    } @else {
+      <a routerLink="/auth/login" appButton class="login-desktop">{{ 'common.buttons.login' | transloco }}</a>
+    }
+
+    <button class="burger-btn" (click)="toggleMenu()">
+      <app-icon [name]="isMenuOpen() ? 'close' : 'menu'"></app-icon>
+    </button>
+  </div>
+</header>

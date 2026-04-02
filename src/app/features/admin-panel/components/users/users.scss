@@ -1,0 +1,232 @@
+.users {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0;
+
+    :host-context(.admin-layout--light) & {
+      color: #0a0a0a;
+    }
+  }
+
+  &__add-btn {
+    background-color: #ff003c;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 0, 60, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 0, 60, 0.4);
+    }
+  }
+
+  &__table-container {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    :host-context(.admin-layout--light) & {
+      background-color: #ffffff;
+      border-color: #e5e5e5;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    }
+  }
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+
+  th {
+    padding: 20px 24px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    letter-spacing: 0.5px;
+
+    :host-context(.admin-layout--light) & {
+      color: rgba(0, 0, 0, 0.4);
+      border-bottom-color: #f0f0f0;
+    }
+  }
+
+  td {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+
+    :host-context(.admin-layout--light) & {
+      border-bottom-color: #f0f0f0;
+    }
+  }
+
+  &__row {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.02);
+      :host-context(.admin-layout--light) & {
+        background-color: #fafafa;
+      }
+    }
+
+    &:last-child td {
+      border-bottom: none;
+    }
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      object-fit: cover;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+
+    :host-context(.admin-layout--light) & {
+      color: #0a0a0a;
+    }
+  }
+
+  &__email {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.3);
+
+    :host-context(.admin-layout--light) & {
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  &__role {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.5px;
+
+    &--admin {
+      background-color: rgba(255, 0, 60, 0.1);
+      color: #ff003c;
+    }
+
+    :host-context(.admin-layout--light) &:not(&--admin) {
+      background-color: #f0f0f0;
+      color: #555;
+    }
+  }
+
+  &__date {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+
+    :host-context(.admin-layout--light) & {
+      color: #444;
+    }
+  }
+
+  &__status {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+
+    &--active {
+      background-color: rgba(52, 199, 89, 0.1);
+      color: #34c759;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__btn {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    &--delete:hover {
+      background-color: rgba(255, 59, 48, 0.1);
+      color: #ff3b30;
+    }
+
+    :host-context(.admin-layout--light) & {
+      background-color: #f5f5f5;
+      color: rgba(0, 0, 0, 0.5);
+
+      &:hover {
+        background-color: #eeeeee;
+        color: #0a0a0a;
+      }
+
+      &--delete:hover {
+        background-color: #fff1f0;
+        color: #ff3b30;
+      }
+    }
+  }
+}

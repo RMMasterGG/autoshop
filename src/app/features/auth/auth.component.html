@@ -1,0 +1,14 @@
+<div class="auth__container">
+  <div class="auth__header">
+    <div class="auth__icon">
+      <app-icon [name]="icon()"></app-icon>
+    </div>
+    <h2 class="auth__title">{{ title_part1() | transloco }} <span>{{ title_part2() | transloco }}</span></h2>
+    <p class="auth__subtitle">{{ subtitle() | transloco }}</p>
+  </div>
+  <router-outlet></router-outlet>
+  <div class="border"></div>
+  <div class="text-link">
+    <p>{{ textLink() | transloco }} <a [href]="href()">{{ link() | transloco }}</a></p>
+  </div>
+</div>

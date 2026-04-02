@@ -1,0 +1,20 @@
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-block: calc(var(--spacing) * 2);
+
+  background-color: color-mix(in srgb, white 10%, transparent);
+  backdrop-filter: blur(20 px);
+  border-bottom: 1px solid color-mix(in srgb, white 20%, transparent);
+}
+
+.offline-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include container;
+}

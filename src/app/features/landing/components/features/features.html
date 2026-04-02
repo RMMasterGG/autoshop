@@ -1,0 +1,13 @@
+<div class="features__container">
+  <div class="features__content">
+    @for (item of FEATURES_DATA; track $index) {
+      <div class="feature__card">
+        <div class="feature__icon">
+          <app-icon [name]="item.icon"></app-icon>
+        </div>
+        <h3 class="feature__title">{{ item.title | transloco }}</h3>
+        <p class="feature__description">{{ item.description | transloco }}</p>
+      </div>
+    }
+  </div>
+</div>

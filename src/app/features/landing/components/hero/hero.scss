@@ -1,0 +1,168 @@
+@use "mixins" as *;
+
+:host {
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-height: 90vh;
+  overflow: hidden;
+  background-color: #0a0a0a;
+}
+
+.background {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+}
+
+.overlay-vertical {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(
+      to top,
+      rgba(10, 10, 10, 1) 0%,
+      rgba(10, 10, 10, 0) 50%,
+      rgba(10, 10, 10, 0.5) 100%
+  );
+}
+
+.overlay-horizontal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(
+      to right,
+      rgba(10, 10, 10, 1) 0%,
+      rgba(10, 10, 10, 0.2) 50%,
+      rgba(10, 10, 10, 0) 100%
+  );
+}
+
+.background__filter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 128px;
+  background-image: linear-gradient(
+      to top,
+      rgba(10, 10, 10, 1) 0%,
+      rgba(10, 10, 10, 0) 100%
+  );
+  z-index: 1;
+}
+
+.hero__container {
+  position: relative;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: calc(var(--spacing) * 8);
+  padding-block: calc(var(--spacing) * 20);
+}
+
+.hero__content {
+  max-width: 42rem;
+}
+
+.badge {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  border: 1px solid color-mix(in oklab, var(--neon) 20%, transparent);
+  border-radius: calc(infinity * 1px);
+  color: var(--neon);
+  box-sizing: border-box;
+  background-color: color-mix(in oklab, var(--neon) 10%, transparent);
+  padding-block: calc(var(--spacing) * 1);
+  padding-inline: calc(var(--spacing) * 3);
+  margin-bottom: calc(var(--spacing) * 6);
+
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.badge__content {
+  display: flex;
+  position: relative;
+  width: calc(var(--spacing) * 2);
+  height: calc(var(--spacing) * 2);
+  border-radius: calc(infinity * 1px);
+  margin-inline-end: calc(var(--spacing) * 2);
+}
+
+.badge-indicator__background {
+  display: inline-flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--neon);
+  border-radius: calc(infinity * 1px);
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.badge-indicator {
+  position: relative;
+  border-radius: calc(infinity * 1px);
+  background-color: var(--neon);
+  width: calc(var(--spacing) * 2);
+  height: calc(var(--spacing) * 2);
+}
+
+.hero__title {
+  color: white;
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 6rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin: 0 0 calc(var(--spacing) * 6) 0;
+
+  b {
+    color: var(--neon);
+    text-shadow: 0 0 15px color-mix(in srgb, var(--neon) 70%, transparent);
+  }
+
+  span {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+}
+
+.hero__description {
+  max-width: 32rem;
+  margin: 0 0 calc(var(--spacing) * 10) 0;
+  font-size: 1.125rem;
+  color: color-mix(in oklab, white 60%, transparent);
+}
+
+.hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing) * 4);
+}
+
+.booking__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    margin-inline-end: calc(var(--spacing));
+  }
+}

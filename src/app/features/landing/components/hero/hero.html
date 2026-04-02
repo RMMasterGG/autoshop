@@ -1,0 +1,31 @@
+<div class="background">
+  <img src="img/hero-background.avif" alt="">
+  <div class="overlay-vertical"></div>
+  <div class="overlay-horizontal"></div>
+</div>
+<div class="background__filter"></div>
+<div class="hero__container">
+  <div class="hero__content">
+    <div class="badge">
+      <div class="badge__content">
+        <div class="badge-indicator__background"></div>
+        <div class="badge-indicator"></div>
+      </div>
+      <span>{{ 'main.hero.badge' | transloco }}</span>
+    </div>
+    <h1 class="hero__title">
+      Auto<b>Shop</b>
+      <br>
+      <span>{{ 'main.hero.title' | transloco }}</span>
+    </h1>
+    <p class="hero__description">{{ 'main.hero.description' | transloco }}</p>
+    <div class="hero__buttons">
+      <a appButton [size]="'lg'" class="booking__button" href=""
+         [attr.aria-label]="'main.hero.booking_aria' | transloco">{{ 'main.hero.booking' | transloco }}
+        <app-icon [name]="'arrow-forward'"></app-icon>
+      </a>
+      <a appButton [variant]="'ghost'" [size]="'lg'" class="" href=""
+         [attr.aria-label]="'main.hero.services_aria' | transloco">{{ 'main.hero.services' | transloco }}</a>
+    </div>
+  </div>
+</div>

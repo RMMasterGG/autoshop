@@ -1,0 +1,24 @@
+<div class="services__container">
+  <div class="services__title">
+    <h2 class="title" #title>{{ 'main.services.title_part1' | transloco }} <span>{{ 'main.services.title_part2' | transloco }}</span></h2>
+    <div class="border" [style]="borderStyle()"></div>
+  </div>
+  <div class="services__list">
+    @for (service of servicesStore.entities(); track service.id) {
+      <div (click)="onServiceSelect(service.actionType, service.actionValue)" class="services__item">
+        <div class="service__header">
+          <div class="service__icon">
+            <app-icon [name]="service.icon"></app-icon>
+          </div>
+          @if (service.price) {
+            <span class="service__price">{{ 'main.services.card.from' | transloco }} {{ [service.price | number].toString().replace(',', ' ') }}</span>
+          }
+        </div>
+        <h3 class="service__title">{{ service.title }}</h3>
+        <p class="service__description">{{ service.description }}</p>
+          <button class="service__button">{{ 'main.services.card.button' | transloco }}<app-icon class="btn__icon" [name]="'chevron_right'"></app-icon></button>
+        <div class="service__decor"></div>
+      </div>
+    }
+  </div>
+</div>

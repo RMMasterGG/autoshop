@@ -1,0 +1,87 @@
+:host {
+  display: block;
+  background-color: var(--color-bg);
+  // Mobile-first: уменьшенные отступы для мобилок
+  padding-block: calc(var(--spacing) * 12);
+
+  // На десктопе возвращаем оригинальный отступ
+  @media (min-width: 1024px) {
+    padding-block: calc(var(--spacing) * 24);
+  }
+}
+
+.features__container {
+  max-width: 80rem;
+  margin-inline: auto;
+  // На мобилках отступы поменьше
+  padding-inline: calc(var(--spacing) * 4);
+  box-sizing: border-box;
+
+  @media (min-width: 1024px) {
+    padding-inline: calc(var(--spacing) * 8);
+  }
+}
+
+.features__content {
+  display: grid;
+  // Mobile: 1 колонка
+  grid-template-columns: 1fr;
+  gap: calc(var(--spacing) * 6);
+
+  // Планшет: 2 колонки
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(var(--spacing) * 8);
+  }
+
+  // Десктоп: 4 колонки
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.feature__card {
+  padding: calc(var(--spacing) * 6);
+  background-color: color-mix(in oklab, var(--card) 80%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 1.2, 0.8, 1),
+  box-shadow 0.3s cubic-bezier(0.25, 1.2, 0.8, 1);
+  box-shadow: 0 0 15px var(--card);
+
+  &:hover {
+    border-color: color-mix(in oklab, var(--neon) 80%, transparent);
+    box-shadow: 0 0 15px color-mix(in oklab, var(--neon) 30%, transparent);
+    .feature__icon {
+      background-color: color-mix(in oklab, var(--neon) 20%, transparent);
+    }
+  }
+}
+
+.feature__icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--spacing) * 12);
+  height: calc(var(--spacing) * 12);
+  background-color: color-mix(in oklab, white 5%, transparent);
+  color: white;
+  border-radius: 0.75rem;
+  transition: background-color 0.3s cubic-bezier(0.25, 1.2, 0.8, 1);
+
+  margin-bottom: calc(var(--spacing) * 6);
+}
+
+.feature__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 calc(var(--spacing) * 3);
+}
+
+.feature__description {
+  margin: 0;
+  font-size: 0.875rem;
+  color: color-mix(in oklab, white 50%, transparent);
+}

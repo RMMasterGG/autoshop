@@ -1,0 +1,205 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  position: relative;
+  // Уменьшаем вертикальные отступы на мобилках
+  padding-block: calc(var(--spacing) * 12);
+  box-sizing: border-box;
+  overflow: hidden;
+
+  @media (min-width: 1024px) {
+    padding-block: calc(var(--spacing) * 24);
+  }
+}
+
+.about__container {
+  padding-inline: calc(var(--spacing) * 4);
+  max-width: 80rem;
+  margin-inline: auto;
+  box-sizing: border-box;
+
+  @media (min-width: 1024px) {
+    padding-inline: calc(var(--spacing) * 8);
+  }
+}
+
+.about__content {
+  display: flex;
+  // Mobile: колонкой
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--spacing) * 12);
+
+  // Desktop: в ряд
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    gap: calc(var(--spacing) * 16);
+  }
+}
+
+.about__image {
+  width: 100%; // На мобилках во всю ширину
+  max-width: 500px; // Ограничение для больших мобилок/планшетов
+  position: relative;
+  box-sizing: border-box;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+    max-width: none;
+  }
+}
+
+.image {
+  display: block;
+  border: 4px solid color-mix(in oklab, var(--neon) 20%, transparent);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  z-index: 10;
+  position: relative;
+  box-sizing: border-box;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    // Можно добавить filter для стиля
+    transition: transform 0.5s ease;
+  }
+
+  &:hover img {
+    @media (min-width: 1024px) {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.image-decor {
+  display: block;
+  border: 2px solid color-mix(in srgb, var(--neon) 50%, transparent);
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.dec-1 {
+  width: calc(var(--spacing) * 20);
+  height: calc(var(--spacing) * 20);
+  top: calc(var(--spacing) * -5);
+  left: calc(var(--spacing) * -5);
+
+  @media (min-width: 1024px) {
+    width: calc(var(--spacing) * 40);
+    height: calc(var(--spacing) * 40);
+    top: calc(var(--spacing) * -10);
+    left: calc(var(--spacing) * -10);
+  }
+}
+
+.dec-2 {
+  width: calc(var(--spacing) * 30);
+  height: calc(var(--spacing) * 30);
+  bottom: calc(var(--spacing) * -5);
+  right: calc(var(--spacing) * -5);
+
+  @media (min-width: 1024px) {
+    width: calc(var(--spacing) * 60);
+    height: calc(var(--spacing) * 60);
+    bottom: calc(var(--spacing) * -10);
+    right: calc(var(--spacing) * -10);
+  }
+}
+
+.about__text {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  // Центрируем текст на мобилках
+  text-align: center;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+    text-align: left;
+  }
+}
+
+.about__title {
+  font-size: clamp(1.5rem, 10vw, 3rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  margin: 0 0 calc(var(--spacing) * 6) 0;
+  color: white;
+
+  line-height: 1;
+
+  word-wrap: break-word;
+
+  span {
+    color: var(--neon);
+    text-shadow: 0 0 15px color-mix(in srgb, var(--neon) 70%, transparent);
+  }
+}
+
+.about__subtitle {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: color-mix(in oklab, white 80%, transparent);
+  margin: 0 0 calc(var(--spacing) * 6) 0;
+
+  @media (min-width: 1024px) {
+    font-size: 1.25rem;
+  }
+}
+
+.about__description {
+  font-size: 0.9375rem;
+  color: color-mix(in oklab, white 50%, transparent);
+
+  p {
+    margin: 0 0 calc(var(--spacing) * 4) 0;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 1rem;
+  }
+}
+
+.about__cards {
+  display: grid;
+  // Мобилки: 1 колонка
+  grid-template-columns: 1fr;
+  gap: calc(var(--spacing) * 8);
+  margin-top: calc(var(--spacing) * 10);
+
+  // Планшеты и выше: 2 колонки
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    margin-top: calc(var(--spacing) * 12);
+  }
+}
+
+.card__title {
+  font-size: clamp(1.5rem, 8vw, 2.25rem);
+  font-weight: 900;
+  color: var(--neon);
+  text-shadow: 0 0 15px color-mix(in srgb, var(--neon) 70%, transparent);
+  margin: 0 0 calc(var(--spacing) * 2) 0;
+}
+
+.card__description {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 0.05em;
+
+  @media (min-width: 1024px) {
+    font-size: 0.875rem;
+  }
+}

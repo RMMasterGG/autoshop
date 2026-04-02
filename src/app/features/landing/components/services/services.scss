@@ -1,0 +1,214 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  // Уменьшаем вертикальный отступ для мобилок
+  padding-block: calc(var(--spacing) * 12);
+  box-sizing: border-box;
+
+  @media (min-width: 1024px) {
+    padding-block: calc(var(--spacing) * 24);
+  }
+}
+
+.services__container {
+  // Компактные отступы по бокам для мобильных
+  padding-inline: calc(var(--spacing) * 4);
+  max-width: 80rem;
+  box-sizing: border-box;
+  margin-inline: auto;
+
+  @media (min-width: 1024px) {
+    padding-inline: calc(var(--spacing) * 8);
+  }
+}
+
+.services__title {
+  position: relative;
+  text-align: center;
+  margin-bottom: calc(var(--spacing) * 10);
+
+  @media (min-width: 1024px) {
+    margin-bottom: calc(var(--spacing) * 16);
+  }
+}
+
+.title {
+  display: inline-block;
+  width: auto;
+  // Адаптивный шрифт для заголовка
+  font-size: clamp(1.75rem, 8vw, 3rem);
+  font-style: italic;
+  text-transform: uppercase;
+  font-weight: 900;
+  margin: 0 0 calc(var(--spacing) * 4) 0;
+  color: white;
+  line-height: 1.1;
+
+  span {
+    color: var(--neon);
+    text-shadow: 0 0 15px color-mix(in srgb, var(--neon) 70%, transparent);
+  }
+}
+
+.border {
+  margin-inline: auto;
+  height: var(--spacing);
+  border-radius: calc(infinity * 1px);
+  background-color: var(--neon);
+  // На мобилках полоска под заголовком не должна быть слишком длинной
+  max-width: 100%;
+}
+
+.services__list {
+  display: grid;
+  // Mobile-First: 1 колонка
+  grid-template-columns: 1fr;
+  gap: calc(var(--spacing) * 6);
+
+  // Планшеты: 2 колонки
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(var(--spacing) * 8);
+  }
+
+  // Десктоп: 3 колонки
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.services__item {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  // Уменьшаем внутренние отступы на мобилках
+  padding: calc(var(--spacing) * 6);
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+  border-color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-sizing: border-box;
+  cursor: pointer;
+
+  @media (min-width: 1024px) {
+    padding: calc(var(--spacing) * 8);
+  }
+
+  &:hover {
+    border-color: var(--neon);
+
+    .service__icon {
+      transform: scale(1.05);
+    }
+
+    .service__title {
+      color: var(--neon);
+    }
+
+    .service__button {
+      @media (min-width: 1024px) {
+        margin-left: calc(var(--spacing) * 2);
+      }
+    }
+
+    .btn__icon {
+      @media (min-width: 1024px) {
+        margin-left: calc(var(--spacing) * 1);
+      }
+    }
+
+    .service__decor {
+      background-color: color-mix(in oklab, var(--neon) 20%, transparent);
+    }
+  }
+}
+
+.service__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: calc(var(--spacing) * 6);
+}
+
+.service__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  width: calc(var(--spacing) * 12);
+  height: calc(var(--spacing) * 12);
+  background-color: color-mix(in oklab, var(--neon) 10%, transparent);
+  color: white;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  @media (min-width: 1024px) {
+    width: calc(var(--spacing) * 14);
+    height: calc(var(--spacing) * 14);
+  }
+}
+
+.service__price {
+  font-size: 0.75rem;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  color: var(--neon);
+  padding-block: calc(var(--spacing) * 1);
+  padding-inline: calc(var(--spacing) * 2);
+  background-color: color-mix(in oklab, var(--neon) 10%, transparent);
+  border-radius: 0.25rem;
+  font-weight: 700;
+}
+
+.service__title {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 calc(var(--spacing) * 3) 0;
+  transition: color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.service__description {
+  color: color-mix(in oklab, white 50%, transparent);
+  margin: 0 0 calc(var(--spacing) * 6) 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+
+  @media (min-width: 1024px) {
+    margin: 0 0 calc(var(--spacing) * 8) 0;
+  }
+}
+
+.service__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border: none;
+  color: white;
+  padding: 0;
+  transition: margin-left 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  @media (min-width: 1024px) {
+    font-size: 0.875rem;
+  }
+}
+
+.btn__icon {
+  transition: margin-left 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.service__decor {
+  background-color: color-mix(in oklab, var(--neon) 5%, transparent);
+  border-radius: 50%;
+  width: calc(var(--spacing) * 32);
+  height: calc(var(--spacing) * 32);
+  bottom: calc(var(--spacing) * -12);
+  right: calc(var(--spacing) * -12);
+  filter: blur(64px);
+  position: absolute;
+  transition: background-color 0.5s cubic-bezier(0.25, 1.2, 0.8, 1);
+  pointer-events: none;
+}

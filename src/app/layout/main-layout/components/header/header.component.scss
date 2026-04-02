@@ -1,5 +1,258 @@
+@use 'mixins' as *;
+
 :host {
-  display: block;
-  padding: calc(var(--spacing) * 2);
-  background-color: black;
+  display: flex;
+  align-items: center;
+  height: calc(var(--spacing) * 16); // Меньше на мобилках
+  position: sticky;
+  top: 0;
+  z-index: 1000; // Повысил z-index для перекрытия
+  background-color: color-mix(in srgb, var(--bg) 60%, transparent);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border); // Использую переменную border для красоты
+  box-shadow: 0 0 10px color-mix(in srgb, var(--bg) 80%, transparent);
+  transition: height 0.3s ease;
+
+  @media (min-width: 1024px) {
+    height: calc(var(--spacing) * 20); // Твой оригинал для десктопа
+  }
+}
+
+.header__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: calc(var(--spacing) * 4); // Меньше отступы на мобилках
+  width: 100%;
+  @include container;
+
+  @media (min-width: 1024px) {
+    padding-inline: calc(var(--spacing) * 8); // Твой оригинал
+  }
+}
+
+/* BRAND */
+.brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--spacing) * 2);
+  cursor: pointer;
+  z-index: 1001; // Поверх мобильного меню
+}
+
+.brand__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--spacing) * 8); // Чуть меньше на мобилках
+  height: calc(var(--spacing) * 8);
+  background-color: var(--neon);
+  border-radius: calc(var(--spacing) * 2);
+  color: white;
+
+  @media (min-width: 1024px) {
+    width: calc(var(--spacing) * 10);
+    height: calc(var(--spacing) * 10);
+  }
+
+  &:hover {
+    app-icon {
+      animation: rotating 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+  }
+}
+
+.brand__name {
+  color: white;
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 1.25rem; // Чуть меньше на мобилках
+  font-weight: 900;
+  letter-spacing: -0.05em;
+
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+  }
+
+  b {
+    color: var(--neon);
+    text-shadow: 0 0 15px color-mix(in srgb, var(--neon) 70%, transparent);
+  }
+}
+
+/* NAVIGATION */
+.navigation {
+  // Mobile styles (Full screen overlay)
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--spacing) * 8);
+
+  // Анимация появления
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+
+  &--open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  // Desktop styles
+  @media (min-width: 1024px) {
+    position: relative;
+    height: auto;
+    width: auto;
+    background: transparent;
+    flex-direction: row;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    gap: calc(var(--spacing) * 4);
+  }
+}
+
+.navigation__button {
+  text-decoration: none;
+  color: var(--neon);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.5rem; // Крупнее для пальцев на мобилках
+  letter-spacing: 0.1em;
+  cursor: pointer;
+
+  @media (min-width: 1024px) {
+    font-size: 0.875rem; // Твой оригинал
+  }
+}
+
+/* Цвета кнопок (Твой оригинал) */
+.booking__button {
+  color: white;
+}
+
+.profile-button {
+  padding-inline: calc(var(--spacing) * 6);
+  padding-block: calc(var(--spacing) * 2);
+  color: white;
+  background-color: var(--neon);
+  border: none;
+  border-radius: calc(var(--spacing) * 2);
+  cursor: pointer;
+  transition: color 0.3s cubic-bezier(0.25, 1.2, 0.8, 1),
+  background-color 0.3s cubic-bezier(0.25, 1.2, 0.8, 1),
+  transform 0.3s cubic-bezier(0.25, 1.2, 0.8, 1);
+  user-select: none;
+
+  &:hover {
+    color: var(--neon);
+    background-color: white;
+    box-shadow: 0 0 5px color-mix(in srgb, white, transparent 30%);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* ACTIONS (Theme, Login, Burger) */
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing) * 4);
+  z-index: 1001;
+}
+
+.theme-picker {
+  display: flex;
+  color: color-mix(in srgb, white 50%, transparent);
+}
+
+.login-desktop {
+  display: none; // Скрываем на мобилках стандартную кнопку входа
+  @media (min-width: 1024px) {
+    display: block;
+  }
+}
+
+.burger-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--spacing) * 1);
+
+  @media (min-width: 1024px) {
+    display: none; // Прячем бургер на десктопе
+  }
+}
+
+/* INDICATOR (Только для десктопа) */
+.active-indicator {
+  display: none; // Отключаем на мобилках, чтобы не глючил при вертикальном меню
+
+  @media (min-width: 1024px) {
+    display: flex;
+    position: absolute;
+    height: 4px;
+    border-radius: calc(infinity * 1px);
+    background-color: var(--neon);
+    box-shadow: 0 0 15px color-mix(in srgb, var(--neon) 70%, transparent);
+    z-index: 100;
+    pointer-events: none;
+    bottom: calc(var(--spacing) * -4); // Позиция под текстом
+    opacity: 0;
+
+    &.animated {
+      transition: left 0.3s cubic-bezier(0.25, 1.2, 0.8, 1),
+      width 0.3s cubic-bezier(0.25, 1.2, 0.8, 1);
+    }
+  }
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--spacing) * 2);
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+}
+
+.header__user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header__user-name {
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.header__user-role {
+  color: color-mix(in oklab, white, transparent 50%);
+  font-size: 12px;
 }

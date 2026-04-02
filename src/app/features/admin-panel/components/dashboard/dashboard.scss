@@ -1,0 +1,367 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0;
+
+    :host-context(.admin-layout--light) & {
+      color: #0a0a0a;
+    }
+  }
+
+  &__period {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 4px;
+    border-radius: 12px;
+
+    :host-context(.admin-layout--light) & {
+      background-color: #f0f0f0;
+    }
+
+    &-btn {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.4);
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+
+      &--active {
+        background-color: #ff003c;
+        color: #ffffff;
+        box-shadow: 0 4px 10px rgba(255, 0, 60, 0.3);
+      }
+
+      :host-context(.admin-layout--light) & {
+        color: rgba(0, 0, 0, 0.4);
+        &:not(.dashboard__period-btn--active):hover {
+          color: #0a0a0a;
+        }
+      }
+    }
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  &__charts {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Карточки статистики
+.stat-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 0, 60, 0.2);
+  }
+
+  :host-context(.admin-layout--light) & {
+    background-color: #ffffff;
+    border-color: #e5e5e5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  }
+
+  &__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+
+    &--blue { background-color: rgba(0, 122, 255, 0.1); color: #007aff; }
+    &--green { background-color: rgba(52, 199, 89, 0.1); color: #34c759; }
+    &--purple { background-color: rgba(175, 82, 222, 0.1); color: #af52de; }
+    &--orange { background-color: rgba(255, 149, 0, 0.1); color: #ff9500; }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    :host-context(.admin-layout--light) & { color: rgba(0, 0, 0, 0.4); }
+  }
+
+  &__value {
+    font-size: 24px;
+    font-weight: 800;
+    :host-context(.admin-layout--light) & { color: #0a0a0a; }
+  }
+
+  &__trend {
+    font-size: 12px;
+    font-weight: 700;
+    &--up { color: #34c759; }
+    &--down { color: #ff3b30; }
+  }
+}
+
+// Карточки графиков
+.chart-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 24px;
+
+  :host-context(.admin-layout--light) & {
+    background-color: #ffffff;
+    border-color: #e5e5e5;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+    :host-context(.admin-layout--light) & { color: #0a0a0a; }
+  }
+}
+
+// Стилизация мок-графика
+.chart-mock {
+  height: 240px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px 0;
+  box-sizing: border-box;
+
+  &__bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+    gap: 8px;
+  }
+
+  &__bar-wrapper {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__bar-area {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 12px 12px 4px 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    overflow: visible;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.06);
+
+      .chart-mock__bar {
+        filter: brightness(1.2);
+        transform: scaleX(1.1);
+        box-shadow: 0 6px 20px rgba(255, 0, 60, 0.4);
+      }
+
+      .chart-mock__tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(-15px);
+      }
+    }
+
+    :host-context(.admin-layout--light) & {
+      background-color: rgba(0, 0, 0, 0.03);
+      &:hover { background-color: rgba(0, 0, 0, 0.06); }
+    }
+  }
+
+  &__bar {
+    width: 50%;
+    margin: 0 auto;
+    background: linear-gradient(to top, #ff003c, #ff4d79);
+    border-radius: 6px 6px 2px 2px;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(255, 0, 60, 0.2);
+    max-height: 100%;
+    min-height: 4px;
+  }
+
+  &__tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: #1a1a1a transparent transparent transparent;
+    }
+
+    &-value {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ff003c;
+    }
+
+    &-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    :host-context(.admin-layout--light) & {
+      background-color: #ffffff;
+      color: #0a0a0a;
+      border-color: #e5e5e5;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      &::after { border-color: #ffffff transparent transparent transparent; }
+      .chart-mock__tooltip-label { color: rgba(0, 0, 0, 0.5); }
+    }
+  }
+
+  &__label {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+    :host-context(.admin-layout--light) & { color: rgba(0, 0, 0, 0.4); }
+  }
+}
+
+// Список последних действий
+.recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.recent-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+  &:last-child { border-bottom: none; padding-bottom: 0; }
+  :host-context(.admin-layout--light) & { border-color: #f0f0f0; }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    &-info { display: flex; flex-direction: column; }
+  }
+
+  &__name {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    :host-context(.admin-layout--light) & { color: #0a0a0a; }
+  }
+
+  &__meta {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+    :host-context(.admin-layout--light) & { color: rgba(0, 0, 0, 0.4); }
+  }
+
+  &__amount {
+    font-size: 14px;
+    font-weight: 800;
+    :host-context(.admin-layout--light) & { color: #0a0a0a; }
+  }
+
+  &__status {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 6px;
+
+    &--pending { background-color: rgba(255, 149, 0, 0.1); color: #ff9500; }
+    &--completed { background-color: rgba(52, 199, 89, 0.1); color: #34c759; }
+  }
+}

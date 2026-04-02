@@ -1,7 +1,8 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {HeaderComponent} from './components/header/header.component';
 import {RouterOutlet} from '@angular/router';
 import {FooterComponent} from './components/footer/footer.component';
+import {NetworkStore} from '../../core/storage/network.store';
 
 @Component({
   selector: 'app-layout',
@@ -17,5 +18,4 @@ import {FooterComponent} from './components/footer/footer.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutComponent {
-
 }

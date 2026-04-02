@@ -1,0 +1,10 @@
+@mixin glass() {
+  background-color: color-mix(in srgb, white 10%, transparent);
+  backdrop-filter: blur(20 px);
+  border: 1px solid color-mix(in srgb, white 20%, transparent);
+}
+
+@mixin container() {
+  margin: 0 auto;
+  width: 80rem;
+}

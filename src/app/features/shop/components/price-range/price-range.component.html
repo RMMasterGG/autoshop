@@ -1,0 +1,21 @@
+<div class="current-price">
+  <span>{{ currentValue() | number:'1.0-0' }} ₽</span>
+</div>
+
+<input
+  class="input"
+  id="price-range"
+  type="range"
+  [min]="min()"
+  [max]="max()"
+  [step]="step()"
+  [value]="currentValue()"
+  [style.--progress]="progress() + '%'"
+  (input)="onInput($event)"
+  (blur)="onBlur()"
+>
+
+<div class="price-label">
+  <span>{{ min() | number:'1.0-0' }} ₽</span>
+  <span>{{ max() | number:'1.0-0' }}+ ₽</span>
+</div>
